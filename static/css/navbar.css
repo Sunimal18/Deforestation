@@ -1,0 +1,113 @@
+/* =========================
+   NAVIGATION BAR
+========================= */
+
+.navbar {
+    height: 70px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Section */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-box {
+    width: 42px;
+    height: 42px;
+    background: #16a34a;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.logo h3 {
+    color: #111827;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Navigation Menu */
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.menu li {
+    display: flex;
+    align-items: center;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #6b7280;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #16a34a;
+}
+
+.menu .active a {
+    color: #16a34a;
+    font-weight: 700;
+}
+
+/* Right Side Icons */
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-icons i,
+.nav-icons span {
+    font-size: 18px;
+    color: #4b5563;
+    cursor: pointer;
+}
+
+.nav-icons i:hover,
+.nav-icons span:hover {
+    color: #16a34a;
+}
+
+/* User Profile */
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-profile h4 {
+    font-size: 14px;
+    color: #111827;
+}

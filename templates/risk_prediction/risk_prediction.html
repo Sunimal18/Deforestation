@@ -1,0 +1,197 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Risk Prediction</title>
+
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/risk_prediction.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+{% include 'partials/navbar.html' %}
+
+<div class="content">
+
+    <div class="page-header">
+        <div>
+            <h1>Risk Prediction Analysis</h1>
+            <p>AI-powered deforestation risk assessment for Wilpattu Forest</p>
+        </div>
+
+        <select class="period-select">
+            <option>Next 6 Months</option>
+            <option>Next 12 Months</option>
+        </select>
+    </div>
+
+    <!-- Summary Cards -->
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="icon danger">⚠</div>
+            <div>
+                <h4>High Risk Areas</h4>
+                <h2>{{ high_risk_count }}</h2>
+                <span>AI designated high-alert</span>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="icon warning">↗</div>
+            <div>
+                <h4>Prediction Accuracy</h4>
+                <h2>87.3%</h2>
+                <span>Model confidence score</span>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="icon primary">📍</div>
+            <div>
+                <h4>Total Areas Monitored</h4>
+                <h2>{{ total_monitored }}</h2>
+                <span>Across Wilpattu Forest</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Charts -->
+
+    <div class="chart-row">
+
+        <div class="chart-card">
+            <h3>Monthly Prediction Trend</h3>
+            <canvas id="predictionChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h3>Risk Distribution</h3>
+            <canvas id="riskChart"></canvas>
+        </div>
+
+    </div>
+
+    <!-- High Risk Areas Table -->
+
+    <div class="table-card">
+        <h2>High-Risk Areas Requiring Attention</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Area ID</th>
+                    <th>Risk Score</th>
+                    <th>Risk Level</th>
+                    <th>Primary Factors</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for area in areas|slice:":20" %}
+                <tr>
+                    <td>{{ area.area_id }}</td>
+                    <td>
+                        <div class="risk-bar">
+                            <div class="bar {{ area.risk_level }}" style="width:{{ area.risk_score }}%"></div>
+                        </div>
+                        {{ area.risk_score }}
+                    </td>
+                    <td><span class="badge {{ area.risk_level }}">{{ area.get_risk_level_display }}</span></td>
+                    <td>{{ area.primary_factors }}</td>
+                    <td><a href="#">View Details</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No areas loaded in database.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Risk Factors -->
+
+    <div class="factor-card">
+
+        <h2>Risk Factors Analysis</h2>
+
+        <div class="factor">
+            <div class="factor-header">
+                <h3>Proximity to Roads</h3>
+                <span>85% impact</span>
+            </div>
+
+            <p>Areas within 500m of roads</p>
+
+            <div class="factor-progress">
+                <div class="factor-fill" style="width:85%"></div>
+            </div>
+        </div>
+
+        <div class="factor">
+            <div class="factor-header">
+                <h3>Rainfall Decline</h3>
+                <span>78% impact</span>
+            </div>
+
+            <p>20% decrease in annual rainfall</p>
+
+            <div class="factor-progress">
+                <div class="factor-fill" style="width:78%"></div>
+            </div>
+        </div>
+
+        <div class="factor">
+            <div class="factor-header">
+                <h3>Human Settlement</h3>
+                <span>72% impact</span>
+            </div>
+
+            <p>Distance from populated areas</p>
+
+            <div class="factor-progress">
+                <div class="factor-fill" style="width:72%"></div>
+            </div>
+        </div>
+
+        <div class="factor">
+            <div class="factor-header">
+                <h3>Forest Edge</h3>
+                <span>65% impact</span>
+            </div>
+
+            <p>Distance from forest boundary</p>
+
+            <div class="factor-progress">
+                <div class="factor-fill" style="width:65%"></div>
+            </div>
+        </div>
+
+        <div class="factor">
+            <div class="factor-header">
+                <h3>Soil Quality</h3>
+                <span>58% impact</span>
+            </div>
+
+            <p>Degraded soil conditions</p>
+
+            <div class="factor-progress">
+                <div class="factor-fill" style="width:58%"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script src="{% static 'js/risk_prediction.js' %}"></script>
+
+</body>
+</html>

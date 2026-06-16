@@ -1,0 +1,35 @@
+- [x] Install database dependencies (`psycopg2-binary`, `python-dotenv`, `pyproj`)
+- [x] Create local `.env` and configure Django database `settings.py` for Supabase
+- [x] Define `DisturbanceArea` database model
+- [x] Define `RiskArea` database model
+- [x] Generate and apply database migrations to Supabase PostgreSQL
+- [x] Implement import command to load GeoJSON datasets, convert UTM coordinates to standard Lat/Lng, and populate database
+- [x] Run import command to populate Supabase tables (531 disturbances, 424 risk areas successfully loaded)
+- [x] Connect frontend views and templates to query database records dynamically
+- [x] Create the **Reports** page (with metrics, satellite map, NDVI trends, and recent detections table)
+- [x] Add Leaflet satellite overview map on the Reports page using Esri World Imagery tiles
+- [x] Implement interactive map layer toggling (Disturbance, Risk Prediction, Reforestation layers) via the sidebar
+- [x] Implement dynamic active menu class on the navbar
+- [x] Fix: Made table severity and status filters interactive on the Disturbance page
+- [x] Fix: Corrected `risk_prediction.js` filename spelling to render the prediction charts
+- [x] Fix: Enabled Leaflet map on the Reforestation page
+- [x] Fix: Connected Reforestation sidebar checkbox layer toggling
+- [x] Fix: Enabled dynamic canvas NDVI chart on the Reforestation page
+- [x] Fix: Made Reforestation recent alerts dynamic, loading them from the Supabase database
+- [x] Fix: Shifted database dates and integrated Django Humanize to display dynamic relative dates ("Today", "Yesterday") for all active alerts
+- [x] Fix: Added Chart.js script tag to dashboard head to resolve dashboard chart load failure
+- [x] Fix: Removed conflicting duplicate map initialization code from `dashboard.js`
+- [x] Fix: Connected dashboard alerts panel to show both Disturbance and AI High-Risk alerts
+- [x] Fix: Applied premium themed styling for alert cards (orange for disturbances, red for risk alerts) on both pages
+- [x] Fix: Styled dashboard NDVI chart to match the reforestation page chart's layout
+- [x] Fix: Added `?v=1.4` cache-busting strings to all css/js static files on dashboard and reforestation templates
+- [x] Feature: Distributed disturbance dates across years 2010 to 2026 in Supabase database
+- [x] Feature: Added `detection_date` to disturbances GeoJSON API endpoint
+- [x] Feature: Implemented two-way year range selection filters and range slider on Dashboard and Reforestation sidebars
+- [x] Feature: Programmed real-time GeoJSON filtering on Dashboard and Reforestation maps based on year selects/slider
+- [x] Feature: Implemented Monitoring Reports date range and region filters (North/East/South/West sectors and Central zone)
+- [x] Feature: Programmed automatic polygon centroid mapping to regions on the Reports page
+- [x] Feature: Enabled dynamic Leaflet map, Chart.js metrics, NDVI/Disturbance line & bar graphs, and recent detections table updates in `reports.js` on filter changes
+- [x] Feature: Programmed Download PDF button using printing styles in `reports.css` optimized for A4 page format
+- [x] Feature: Programmed Export CSV button in `reports.js` to compile the currently filtered disturbances on-the-fly and download as a CSV file
+- [x] Feature: Wrapped reports page charts in relative height containers (240px) to render them in a clean, compact, shortened layout

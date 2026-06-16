@@ -1,0 +1,21 @@
+<nav class="navbar">
+
+    <div class="logo">
+        <div class="logo-box">F</div>
+        <h3>Forest AI</h3>
+    </div>
+
+    <ul class="menu">
+        <li class="{% if request.path == '/dashboard/' %}active{% endif %}"><a href="/dashboard/">Dashboard</a></li>
+        <li class="{% if request.path == '/disturbance-detection/' %}active{% endif %}"><a href="/disturbance-detection/">Disturbance Detection</a></li>
+        <li class="{% if request.path == '/risk-prediction/' %}active{% endif %}"><a href="/risk-prediction/">Risk Prediction</a></li>
+        <li class="{% if request.path == '/reforestation/' %}active{% endif %}"><a href="/reforestation/">Reforestation</a></li>
+        <li class="{% if request.path == '/dashboard/reports/' %}active{% endif %}"><a href="/dashboard/reports/">Reports</a></li>
+    </ul>
+
+    <div class="nav-icons">
+        <span>🔔</span>
+        <span>👤</span>
+    </div>
+
+</nav>

@@ -1,0 +1,28 @@
+# Environment variables (contains database credentials)
+.env
+
+# Large media files (exceeds GitHub's 100MB limit)
+figma_animation.mp4
+*.mp4
+*.zip
+*.tar.gz
+
+# Python & Django caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+*.log
+
+# Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+
+# IDE and Project Settings
+.vscode/
+.idea/
+.gemini/
+.DS_Store

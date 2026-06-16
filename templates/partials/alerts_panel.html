@@ -1,0 +1,20 @@
+{% load humanize %}
+{% for alert in recent_disturbances %}
+<div class="alert-card">
+    <h4>⚠ Disturbance Detected</h4>
+    <p>{{ alert.area_id }}</p>
+    <small>{{ alert.detection_date|naturalday|title }}</small>
+</div>
+{% empty %}
+<div class="alert-card">
+    <h4>No Active Alerts</h4>
+</div>
+{% endfor %}
+
+{% for alert in recent_risks %}
+<div class="alert-card" style="background: #fef2f2; border-left-color: #ef4444;">
+    <h4 style="color: #b91c1c;">⚠ High Risk Alert</h4>
+    <p>{{ alert.area_id }} (Score: {{ alert.risk_score }})</p>
+    <small style="color: #7f1d1d;">AI Risk Assessment</small>
+</div>
+{% endfor %}

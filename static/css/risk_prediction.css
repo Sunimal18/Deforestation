@@ -1,0 +1,399 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f5f7fa;
+}
+
+.content{
+    padding:30px;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.page-header p{
+    color:#6b7280;
+}
+
+.period-select{
+    padding:12px 20px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    background:white;
+}
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    margin-bottom:30px;
+}
+
+.summary-card{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.icon{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+}
+
+.danger{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.warning{
+    background:#ffedd5;
+    color:#ea580c;
+}
+
+.primary{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.summary-card h4{
+    color:#6b7280;
+    margin-bottom:8px;
+}
+
+.summary-card h2{
+    font-size:42px;
+}
+
+.summary-card span{
+    color:#6b7280;
+}
+
+.chart-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.chart-card{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.chart-card h3{
+    margin-bottom:20px;
+}
+
+.table-card,
+.factor-card{
+    background:#fff;
+    margin-top:25px;
+    padding:30px;
+    border-radius:18px;
+    border:1px solid #e5e7eb;
+}
+
+.table-card h2,
+.factor-card h2{
+    margin-bottom:25px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    text-align:left;
+    padding:18px;
+    color:#6b7280;
+}
+
+td{
+    padding:18px;
+    border-top:1px solid #eee;
+}
+
+td a{
+    text-decoration:none;
+    color:#111827;
+    font-weight:600;
+}
+
+.risk-bar{
+    width:125px;
+    height:10px;
+    background:#e5e7eb;
+    border-radius:20px;
+    display:inline-block;
+    margin-right:10px;
+}
+
+.bar{
+    height:100%;
+    border-radius:20px;
+}
+
+.high{
+    background:#ff3131;
+}
+
+.medium{
+    background:#ff6b00;
+}
+
+.low{
+    background:#eab308;
+}
+
+.badge{
+    padding:7px 14px;
+    border-radius:20px;
+    font-size:14px;
+}
+
+.badge.high{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.badge.medium{
+    background:#ffedd5;
+    color:#ea580c;
+}
+
+.badge.low{
+    background:#fef3c7;
+    color:#ca8a04;
+}
+
+/* Risk Factors */
+
+.factor{
+    margin-top:35px;
+}
+
+.factor-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.factor-header h3{
+    font-size:18px;
+}
+
+.factor-header span{
+    font-weight:600;
+}
+
+.factor p{
+    color:#6b7280;
+    margin-bottom:12px;
+}
+
+.factor-progress{
+    height:10px;
+    background:#e5e7eb;
+    border-radius:30px;
+    overflow:hidden;
+}
+
+.factor-fill{
+    height:100%;
+    border-radius:30px;
+    background:linear-gradient(
+        90deg,
+        #ff6b00,
+        #ff3131
+    );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+   HIGH RISK TABLE
+=========================== */
+
+.table-card{
+    background:#fff;
+    margin:30px;
+    padding:30px;
+    border-radius:16px;
+    border:1px solid #e5e7eb;
+}
+
+.table-card h2{
+    margin-bottom:25px;
+    font-size:20px;
+}
+
+.table-card table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.table-card th{
+    text-align:left;
+    padding:16px;
+    color:#6b7280;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.table-card td{
+    padding:18px 16px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.table-card a{
+    text-decoration:none;
+    color:#000;
+    font-weight:600;
+}
+
+/* Risk Bar */
+
+.risk-bar{
+    width:120px;
+    height:10px;
+    background:#e5e7eb;
+    border-radius:20px;
+    display:inline-block;
+    margin-right:10px;
+    overflow:hidden;
+}
+
+.bar{
+    height:100%;
+    border-radius:20px;
+}
+
+.bar.high{
+    background:#ef4444;
+}
+
+.bar.medium{
+    background:#f97316;
+}
+
+.bar.low{
+    background:#eab308;
+}
+
+/* Badge */
+
+.badge{
+    padding:8px 15px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.badge.high{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.badge.medium{
+    background:#fef3c7;
+    color:#d97706;
+}
+
+.badge.low{
+    background:#fef9c3;
+    color:#ca8a04;
+}
+
+/* ===========================
+   FACTOR CARD
+=========================== */
+
+.factor-card{
+    background:#fff;
+    margin:30px;
+    padding:30px;
+    border-radius:16px;
+    border:1px solid #e5e7eb;
+}
+
+.factor-card h2{
+    margin-bottom:30px;
+}
+
+.factor{
+    margin-bottom:35px;
+}
+
+.factor-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.factor-header h3{
+    font-size:18px;
+}
+
+.factor-header span{
+    font-weight:600;
+}
+
+.factor p{
+    color:#6b7280;
+    margin-bottom:12px;
+}
+
+.factor-progress{
+    width:100%;
+    height:10px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.factor-fill{
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(
+        90deg,
+        #f97316 0%,
+        #ef4444 100%
+    );
+}

@@ -1,0 +1,187 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Disturbance Detection</title>
+
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/disturbance.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    {% include 'partials/navbar.html' %}    
+
+    <div class="content">
+
+        <div class="page-header">
+            <h1>Disturbance Detection</h1>
+            <p>Monitor forest disturbances and vegetation changes.</p>
+        </div>
+
+        <!-- Summary Cards -->
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+                <h4>Active Alerts</h4>
+                <h2>{{ active_count }}</h2>
+                <span>Currently active</span>
+            </div>
+
+            <div class="summary-card">
+                <h4>Total Area Affected</h4>
+                <h2>{{ total_area_ha }} ha</h2>
+                <span>Across all areas</span>
+            </div>
+
+            <div class="summary-card">
+                <h4>NDVI Change</h4>
+                <h2>{{ avg_ndvi }}</h2>
+                <span>Average loss</span>
+            </div>
+
+            <div class="summary-card">
+                <h4>AI Accuracy</h4>
+                <h2>91%</h2>
+                <span>Latest Model</span>
+            </div>
+
+        </div>
+
+        <!-- Charts -->
+
+        <div class="chart-row">
+
+            <div class="chart-card">
+                <h3>Disturbance Trend</h3>
+                <canvas id="trendChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3>NDVI Change Analysis</h3>
+                <canvas id="ndviChart"></canvas>
+            </div>
+
+        </div>
+
+        <!-- Detected Disturbances Table -->
+
+        <div class="table-card">
+
+            <div class="table-header">
+                <h2>Detected Disturbances</h2>
+
+                <div class="filters">
+                    <select id="filter-severity">
+                        <option value="all">All Severities</option>
+                        <option value="high">High</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="low">Low</option>
+                    </select>
+
+                    <select id="filter-status">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="monitored">Monitored</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Area ID</th>
+                        <th>Detection Date</th>
+                        <th>NDVI Change</th>
+                        <th>Area Affected</th>
+                        <th>Severity</th>
+                        <th>Status</th>
+                        <th>Confidence</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for area in areas|slice:":20" %}
+                    <tr class="disturbance-row" data-severity="{{ area.severity }}" data-status="{{ area.status }}">
+                        <td><strong>{{ area.area_id }}</strong></td>
+                        <td>{{ area.detection_date|date:"M d, Y" }}</td>
+                        <td class="negative">{{ area.ndvi_change }}</td>
+                        <td>{{ area.area_m2 }} m²</td>
+                        <td><span class="severity {{ area.severity }}">{{ area.get_severity_display }}</span></td>
+                        <td><span class="status {{ area.status }}">{{ area.get_status_display }}</span></td>
+                        <td>
+                            <div class="progress">
+                                <div class="bar" style="width:{% widthratio area.confidence 1 100 %}%"></div>
+                            </div>
+                            {% widthratio area.confidence 1 100 %}%
+                        </td>
+                        <td><a href="#">View Details</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8">No disturbances detected.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+
+        <!-- How Detection Works -->
+
+        <div class="work-card">
+
+            <h2>How Disturbance Detection Works</h2>
+
+            <div class="steps">
+
+                <div class="step">
+                    <div class="step-circle">1</div>
+                    <h3>Satellite Imagery</h3>
+                    <p>Continuous monitoring using Sentinel-2 and Landsat imagery.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-circle">2</div>
+                    <h3>NDVI Analysis</h3>
+                    <p>Calculate vegetation index changes to detect forest loss.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-circle">3</div>
+                    <h3>AI Verification</h3>
+                    <p>Machine learning models verify disturbances and classify severity.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+    <script src="{% static 'js/disturbance.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>  
+
+
+</body>
+
+</html>

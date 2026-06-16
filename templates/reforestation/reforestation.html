@@ -1,0 +1,170 @@
+{% load static humanize %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reforestation</title>
+
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}?v=1.2">
+    <link rel="stylesheet" href="{% static 'css/reforestation.css' %}?v=1.2">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+{% include 'partials/navbar.html' %}
+
+<div class="reforestation-container">
+
+    <!-- LEFT SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="filter-item active" id="layer-disturbance" style="cursor: pointer;">
+            <span class="red-box">✓</span>
+            Disturbance
+        </div>
+
+        <div class="filter-item active" id="layer-risk" style="cursor: pointer;">
+            <span class="orange-box">✓</span>
+            Risk Prediction
+        </div>
+
+        <div class="filter-item active" id="layer-reforestation" style="cursor: pointer;">
+            <span class="green-box">✓</span>
+            Reforestation
+        </div>
+
+        <h2>Time Range</h2>
+
+        <label>Start Year</label>
+        <select id="filter-start-year">
+            <option value="2010" selected>2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+        </select>
+
+        <label>End Year</label>
+        <select id="filter-end-year">
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026" selected>2026</option>
+        </select>
+
+        <label>Selected End Year: <span id="slider-value" style="font-weight: 600;">2026</span></label>
+        <input type="range" id="filter-year-slider" min="2010" max="2026" value="2026">
+
+        <h2>Legend</h2>
+
+        <div class="legend-item">
+            <span class="legend disturbance"></span>
+            Disturbance
+        </div>
+
+        <hr>
+
+        <p class="legend-title">Risk Zones</p>
+
+        <div class="legend-item">
+            <span class="legend stable"></span>
+            Stable Forest
+        </div>
+
+        <div class="legend-item">
+            <span class="legend low"></span>
+            Low Risk
+        </div>
+
+        <div class="legend-item">
+            <span class="legend medium"></span>
+            Medium Risk
+        </div>
+
+        <div class="legend-item">
+            <span class="legend high"></span>
+            High Risk
+        </div>
+
+    </div>
+
+    <!-- MAP -->
+
+    <div class="map-container">
+
+        <div class="map-area">
+            <div id="map" style="height: 100%; width: 100%;"></div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+        {% for alert in recent_disturbances %}
+        <div class="alert-card disturbance">
+            <h3>⚠ Disturbance Detected</h3>
+            <p>{{ alert.area_id }}</p>
+            <span>{{ alert.detection_date|naturalday|title }}</span>
+        </div>
+        {% empty %}
+        <div class="alert-card">
+            <h3>No Active Disturbances</h3>
+        </div>
+        {% endfor %}
+
+        {% for alert in recent_risks %}
+        <div class="alert-card risk">
+            <h3>⚠ High Risk Alert</h3>
+            <p>{{ alert.area_id }} (Score: {{ alert.risk_score }})</p>
+            <span>AI Risk Assessment</span>
+        </div>
+        {% endfor %}
+
+        <a class="alerts-link" href="/disturbance-detection/">
+            View All Alerts →
+        </a>
+
+        <hr>
+
+        <h2>Vegetation Trend (NDVI)</h2>
+
+        <canvas id="ndviChart"></canvas>
+
+    </div>
+
+</div>
+
+<script src="{% static 'js/reforestation.js' %}?v=1.3"></script>
+
+</body>
+</html>

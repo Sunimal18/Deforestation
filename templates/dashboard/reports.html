@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring Reports - FOREST-AI</title>
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reports.css' %}?v=1.4">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+
+    <div class="content">
+        <div class="page-header">
+            <div>
+                <h1>Monitoring Reports</h1>
+            </div>
+            <div class="header-buttons">
+                <button class="btn btn-primary" id="btn-download-pdf"><span class="btn-icon">📥</span> Download PDF</button>
+                <button class="btn btn-secondary" id="btn-export-csv"><span class="btn-icon">📤</span> Export CSV</button>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+            <div class="filter-item">
+                <label>Date Range:</label>
+                <input type="date" id="filter-start-date" value="2010-01-01">
+                <span class="separator">to</span>
+                <input type="date" id="filter-end-date" value="2026-12-31">
+            </div>
+            <div class="filter-item">
+                <label>Region:</label>
+                <select id="filter-region">
+                    <option value="all">All Regions</option>
+                    <option value="North Sector">North Sector</option>
+                    <option value="East Sector">East Sector</option>
+                    <option value="South Sector">South Sector</option>
+                    <option value="West Sector">West Sector</option>
+                    <option value="Central Zone">Central Zone</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Metrics Cards -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h4>Total Disturbances</h4>
+                <h2 id="metric-disturbances">173</h2>
+                <span class="trend up">↑ 12% from last period</span>
+            </div>
+            <div class="summary-card">
+                <h4>High-Risk Zones</h4>
+                <h2 id="metric-risk">28</h2>
+                <span class="trend down">↓ 5% from last period</span>
+            </div>
+            <div class="summary-card">
+                <h4>Reforestation Areas</h4>
+                <h2 id="metric-reforestation">145 ha</h2>
+                <span class="trend up">↑ 18% from last period</span>
+            </div>
+        </div>
+
+        <!-- Forest Area Overview (Satellite Map) -->
+        <div class="map-card">
+            <h3>Forest Area Overview</h3>
+            <div id="overview-map"></div>
+            <div class="legend">
+                <span class="legend-item"><span class="dot red"></span> Disturbance</span>
+                <span class="legend-item"><span class="dot orange"></span> High Risk</span>
+                <span class="legend-item"><span class="dot green"></span> Reforestation</span>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="chart-row">
+            <div class="chart-card">
+                <h3>NDVI Vegetation Trends</h3>
+                <div style="position: relative; height: 240px; width: 100%;">
+                    <canvas id="ndviTrendsChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Disturbance Detection Over Time</h3>
+                <div style="position: relative; height: 240px; width: 100%;">
+                    <canvas id="disturbanceOverTimeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Detections Table -->
+        <div class="table-card">
+            <h3>Recent Detections</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Risk Level</th>
+                        <th>Severity</th>
+                    </tr>
+                </thead>
+                <tbody id="detections-table-body">
+                    <tr>
+                        <td>2026-03-20</td>
+                        <td>North Sector A</td>
+                        <td><span class="badge badge-high">High</span></td>
+                        <td class="text-danger font-medium">Critical</td>
+                    </tr>
+                    <tr>
+                        <td>2026-03-18</td>
+                        <td>East Sector B</td>
+                        <td><span class="badge badge-medium">Medium</span></td>
+                        <td class="text-warning font-medium">Moderate</td>
+                    </tr>
+                    <tr>
+                        <td>2026-03-15</td>
+                        <td>South Sector C</td>
+                        <td><span class="badge badge-high">High</span></td>
+                        <td class="text-danger font-medium">Severe</td>
+                    </tr>
+                    <tr>
+                        <td>2026-03-12</td>
+                        <td>West Sector D</td>
+                        <td><span class="badge badge-low">Low</span></td>
+                        <td class="text-success font-medium">Minor</td>
+                    </tr>
+                    <tr>
+                        <td>2026-03-10</td>
+                        <td>Central Zone</td>
+                        <td><span class="badge badge-high">High</span></td>
+                        <td class="text-danger font-medium">Critical</td>
+                    </tr>
+                    <tr>
+                        <td>2026-03-08</td>
+                        <td>North Sector B</td>
+                        <td><span class="badge badge-medium">Medium</span></td>
+                        <td class="text-warning font-medium">Moderate</td>
+                    </tr>
+                    <tr>
+                        <td>2026-03-05</td>
+                        <td>East Sector A</td>
+                        <td><span class="badge badge-low">Low</span></td>
+                        <td class="text-success font-medium">Minor</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{% static 'js/reports.js' %}?v=1.4"></script>
+</body>
+</html>

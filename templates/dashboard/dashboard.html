@@ -1,0 +1,48 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}?v=1.2">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}?v=1.2">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Dashboard</title>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}    
+
+  <div class="dashboard-container">
+
+        {% include 'partials/sidebar.html' %}
+
+        <div class="center-panel">
+
+            <div class="search-box">
+                <input type="text" placeholder="Search location...">
+            </div>
+
+            {% include 'partials/map_panel.html' %}
+
+        </div>
+
+        <div class="right-panel">
+
+            {% include 'partials/alerts_panel.html' %}
+
+            {% include 'partials/ndvi_chart.html' %}
+
+        </div>
+
+    </div>
+    <script src="{% static 'js/dashboard.js' %}?v=1.3"></script>  
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{% static 'js/map.js' %}?v=1.3"></script>  
+    <script src="{% static 'js/chart.js' %}?v=1.3"></script>  
+</body>
+</html>
+
