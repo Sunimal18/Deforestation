@@ -80,16 +80,23 @@ function updateDisturbanceLayer() {
         },
         onEachFeature: function (feature, layer) {
             let props = feature.properties;
+            let badgeColor = getRiskColor(props.risk_class.toLowerCase());
             let popupContent = `
-                <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 13px; min-width: 150px;">
-                    <h4 style="margin: 0 0 8px 0; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 4px;">Area ${props.area_id}</h4>
-                    <div style="display: grid; gap: 4px;">
-                        <div><b>Severity:</b> <span style="color: ${getSeverityColor(props.severity)}; font-weight: 600;">${props.severity.toUpperCase()}</span></div>
-                        <div><b>Status:</b> ${props.status.toUpperCase()}</div>
-                        <div><b>NDVI Change:</b> <span style="color: #ef4444;">${props.ndvi_change}</span></div>
-                        <div><b>Area:</b> ${props.area_m2.toLocaleString()} m²</div>
-                        <div><b>Confidence:</b> ${Math.round(props.confidence * 100)}%</div>
-                        <div><b>Detected:</b> ${props.detection_date}</div>
+                <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 13px; width: 280px; color: #1e293b;">
+                    <h4 style="margin: 0 0 8px 0; color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Area ${props.area_id} (ID: ${props.polygon_id})</span>
+                        <span style="background: ${badgeColor}; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase;">${props.risk_class} Risk</span>
+                    </h4>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 6px;">
+                        <div style="display: flex; justify-content: space-between;"><b>Area affected:</b> <span>${parseFloat(props.area_ha).toFixed(3)} ha</span></div>
+                        <div style="display: flex; justify-content: space-between;"><b>Restoration Priority:</b> <span style="font-weight: 600; color: #059669;">${props.reforestation_priority}</span></div>
+                        <div style="display: flex; justify-content: space-between;"><b>Distance to Road:</b> <span>${Math.round(props.road_distance_m).toLocaleString()} m</span></div>
+                        <div style="display: flex; justify-content: space-between;"><b>Distance to Village:</b> <span>${Math.round(props.village_distance_m).toLocaleString()} m</span></div>
+                        <div style="display: flex; justify-content: space-between;"><b>Distance to Waterway:</b> <span>${Math.round(props.waterway_distance_m).toLocaleString()} m</span></div>
+                        <div style="display: flex; justify-content: space-between;"><b>Protected Area:</b> <span>${props.protected_area ? '✅ Yes' : '❌ No'}</span></div>
+                        <div style="margin-top: 6px; padding: 8px; background: #f8fafc; border-radius: 6px; border: 1px dashed #cbd5e1; font-size: 11.5px; line-height: 1.4; color: #475569;">
+                            <b>XAI Explanation:</b><br>${props.xai_explanation}
+                        </div>
                     </div>
                 </div>
             `;

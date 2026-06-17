@@ -27,6 +27,11 @@
 - [x] Feature: Added `detection_date` to disturbances GeoJSON API endpoint
 - [x] Feature: Implemented two-way year range selection filters and range slider on Dashboard and Reforestation sidebars
 - [x] Feature: Programmed real-time GeoJSON filtering on Dashboard and Reforestation maps based on year selects/slider
+- [x] Integration: Migrate DisturbanceArea database models to hold FOREST-AI CSV columns
+- [x] Integration: Refactor importer script to perform high-performance bulk joins and imports
+- [x] Integration: Update views to serve dynamic statistics from Table 5 and reforestation counts from Tables 3 & 4
+- [x] Integration: Upgrade map popups to display spatial metrics, distance metrics, and XAI explanation boxes
+- [x] Integration: Render Reforestation Suitability and Priority charts using Chart.js from database counts
 - [x] Feature: Implemented Monitoring Reports date range and region filters (North/East/South/West sectors and Central zone)
 - [x] Feature: Programmed automatic polygon centroid mapping to regions on the Reports page
 - [x] Feature: Enabled dynamic Leaflet map, Chart.js metrics, NDVI/Disturbance line & bar graphs, and recent detections table updates in `reports.js` on filter changes

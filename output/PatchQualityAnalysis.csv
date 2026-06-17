@@ -1,0 +1,205 @@
+mask_file,positive_pixels,background_pixels,disturbance_ratio,category
+mask_0.npy,160,65376,0.244140625,Sparse
+mask_1.npy,5,65531,0.00762939453125,Very Sparse
+mask_10.npy,6,65530,0.0091552734375,Very Sparse
+mask_100.npy,1578,63958,2.4078369140625,Strong
+mask_101.npy,10,65526,0.0152587890625,Very Sparse
+mask_11.npy,1020,64516,1.556396484375,Moderate
+mask_12.npy,149,65387,0.22735595703125,Sparse
+mask_13.npy,7,65529,0.01068115234375,Very Sparse
+mask_14.npy,1,65535,0.00152587890625,Very Sparse
+mask_15.npy,11,65525,0.01678466796875,Very Sparse
+mask_16.npy,306,65230,0.4669189453125,Sparse
+mask_17.npy,1,65535,0.00152587890625,Very Sparse
+mask_18.npy,6,65530,0.0091552734375,Very Sparse
+mask_19.npy,17,65519,0.02593994140625,Very Sparse
+mask_2.npy,767,64769,1.17034912109375,Moderate
+mask_20.npy,22,65514,0.0335693359375,Very Sparse
+mask_21.npy,65,65471,0.09918212890625,Very Sparse
+mask_22.npy,16,65520,0.0244140625,Very Sparse
+mask_23.npy,48,65488,0.0732421875,Very Sparse
+mask_24.npy,53,65483,0.08087158203125,Very Sparse
+mask_25.npy,4,65532,0.006103515625,Very Sparse
+mask_26.npy,78,65458,0.1190185546875,Sparse
+mask_27.npy,10,65526,0.0152587890625,Very Sparse
+mask_28.npy,463,65073,0.70648193359375,Moderate
+mask_29.npy,28,65508,0.042724609375,Very Sparse
+mask_3.npy,6,65530,0.0091552734375,Very Sparse
+mask_30.npy,50,65486,0.0762939453125,Very Sparse
+mask_31.npy,57,65479,0.08697509765625,Very Sparse
+mask_32.npy,34,65502,0.0518798828125,Very Sparse
+mask_33.npy,266,65270,0.4058837890625,Sparse
+mask_34.npy,6,65530,0.0091552734375,Very Sparse
+mask_35.npy,8,65528,0.01220703125,Very Sparse
+mask_36.npy,12,65524,0.018310546875,Very Sparse
+mask_37.npy,523,65013,0.79803466796875,Moderate
+mask_38.npy,26,65510,0.0396728515625,Very Sparse
+mask_39.npy,40,65496,0.06103515625,Very Sparse
+mask_4.npy,12,65524,0.018310546875,Very Sparse
+mask_40.npy,6,65530,0.0091552734375,Very Sparse
+mask_41.npy,29,65507,0.04425048828125,Very Sparse
+mask_42.npy,47,65489,0.07171630859375,Very Sparse
+mask_43.npy,9,65527,0.01373291015625,Very Sparse
+mask_44.npy,32,65504,0.048828125,Very Sparse
+mask_45.npy,6,65530,0.0091552734375,Very Sparse
+mask_46.npy,10,65526,0.0152587890625,Very Sparse
+mask_47.npy,22,65514,0.0335693359375,Very Sparse
+mask_48.npy,204,65332,0.311279296875,Sparse
+mask_49.npy,186,65350,0.2838134765625,Sparse
+mask_5.npy,37,65499,0.05645751953125,Very Sparse
+mask_50.npy,6,65530,0.0091552734375,Very Sparse
+mask_51.npy,31,65505,0.04730224609375,Very Sparse
+mask_52.npy,16,65520,0.0244140625,Very Sparse
+mask_53.npy,20,65516,0.030517578125,Very Sparse
+mask_54.npy,12,65524,0.018310546875,Very Sparse
+mask_55.npy,13,65523,0.01983642578125,Very Sparse
+mask_56.npy,94,65442,0.1434326171875,Sparse
+mask_57.npy,2014,63522,3.0731201171875,Strong
+mask_58.npy,62,65474,0.0946044921875,Very Sparse
+mask_59.npy,140,65396,0.213623046875,Sparse
+mask_6.npy,102,65434,0.1556396484375,Sparse
+mask_60.npy,24,65512,0.03662109375,Very Sparse
+mask_61.npy,164,65372,0.250244140625,Sparse
+mask_62.npy,95,65441,0.14495849609375,Sparse
+mask_63.npy,15,65521,0.02288818359375,Very Sparse
+mask_64.npy,215,65321,0.32806396484375,Sparse
+mask_65.npy,1841,63695,2.80914306640625,Strong
+mask_66.npy,55,65481,0.08392333984375,Very Sparse
+mask_67.npy,43,65493,0.06561279296875,Very Sparse
+mask_68.npy,16,65520,0.0244140625,Very Sparse
+mask_69.npy,41,65495,0.06256103515625,Very Sparse
+mask_7.npy,6,65530,0.0091552734375,Very Sparse
+mask_70.npy,51,65485,0.07781982421875,Very Sparse
+mask_71.npy,150,65386,0.2288818359375,Sparse
+mask_72.npy,1608,63928,2.45361328125,Strong
+mask_73.npy,48,65488,0.0732421875,Very Sparse
+mask_74.npy,169,65367,0.25787353515625,Sparse
+mask_75.npy,261,65275,0.39825439453125,Sparse
+mask_76.npy,192,65344,0.29296875,Sparse
+mask_77.npy,7,65529,0.01068115234375,Very Sparse
+mask_78.npy,21,65515,0.03204345703125,Very Sparse
+mask_79.npy,19,65517,0.02899169921875,Very Sparse
+mask_8.npy,339,65197,0.51727294921875,Moderate
+mask_80.npy,20,65516,0.030517578125,Very Sparse
+mask_81.npy,31,65505,0.04730224609375,Very Sparse
+mask_82.npy,150,65386,0.2288818359375,Sparse
+mask_83.npy,205,65331,0.31280517578125,Sparse
+mask_84.npy,10,65526,0.0152587890625,Very Sparse
+mask_85.npy,23,65513,0.03509521484375,Very Sparse
+mask_86.npy,107,65429,0.16326904296875,Sparse
+mask_87.npy,169,65367,0.25787353515625,Sparse
+mask_88.npy,9,65527,0.01373291015625,Very Sparse
+mask_89.npy,151,65385,0.23040771484375,Sparse
+mask_9.npy,80,65456,0.1220703125,Sparse
+mask_90.npy,21,65515,0.03204345703125,Very Sparse
+mask_91.npy,28,65508,0.042724609375,Very Sparse
+mask_92.npy,21,65515,0.03204345703125,Very Sparse
+mask_93.npy,199,65337,0.30364990234375,Sparse
+mask_94.npy,6,65530,0.0091552734375,Very Sparse
+mask_95.npy,13,65523,0.01983642578125,Very Sparse
+mask_96.npy,36,65500,0.054931640625,Very Sparse
+mask_97.npy,52,65484,0.079345703125,Very Sparse
+mask_98.npy,69,65467,0.10528564453125,Sparse
+mask_99.npy,10,65526,0.0152587890625,Very Sparse
+mask_neg_0.npy,0,65536,0.0,Very Sparse
+mask_neg_1.npy,0,65536,0.0,Very Sparse
+mask_neg_10.npy,0,65536,0.0,Very Sparse
+mask_neg_100.npy,0,65536,0.0,Very Sparse
+mask_neg_101.npy,0,65536,0.0,Very Sparse
+mask_neg_11.npy,0,65536,0.0,Very Sparse
+mask_neg_12.npy,0,65536,0.0,Very Sparse
+mask_neg_13.npy,0,65536,0.0,Very Sparse
+mask_neg_14.npy,0,65536,0.0,Very Sparse
+mask_neg_15.npy,0,65536,0.0,Very Sparse
+mask_neg_16.npy,0,65536,0.0,Very Sparse
+mask_neg_17.npy,0,65536,0.0,Very Sparse
+mask_neg_18.npy,0,65536,0.0,Very Sparse
+mask_neg_19.npy,0,65536,0.0,Very Sparse
+mask_neg_2.npy,0,65536,0.0,Very Sparse
+mask_neg_20.npy,0,65536,0.0,Very Sparse
+mask_neg_21.npy,0,65536,0.0,Very Sparse
+mask_neg_22.npy,0,65536,0.0,Very Sparse
+mask_neg_23.npy,0,65536,0.0,Very Sparse
+mask_neg_24.npy,0,65536,0.0,Very Sparse
+mask_neg_25.npy,0,65536,0.0,Very Sparse
+mask_neg_26.npy,0,65536,0.0,Very Sparse
+mask_neg_27.npy,0,65536,0.0,Very Sparse
+mask_neg_28.npy,0,65536,0.0,Very Sparse
+mask_neg_29.npy,0,65536,0.0,Very Sparse
+mask_neg_3.npy,0,65536,0.0,Very Sparse
+mask_neg_30.npy,0,65536,0.0,Very Sparse
+mask_neg_31.npy,0,65536,0.0,Very Sparse
+mask_neg_32.npy,0,65536,0.0,Very Sparse
+mask_neg_33.npy,0,65536,0.0,Very Sparse
+mask_neg_34.npy,0,65536,0.0,Very Sparse
+mask_neg_35.npy,0,65536,0.0,Very Sparse
+mask_neg_36.npy,0,65536,0.0,Very Sparse
+mask_neg_37.npy,0,65536,0.0,Very Sparse
+mask_neg_38.npy,0,65536,0.0,Very Sparse
+mask_neg_39.npy,0,65536,0.0,Very Sparse
+mask_neg_4.npy,0,65536,0.0,Very Sparse
+mask_neg_40.npy,0,65536,0.0,Very Sparse
+mask_neg_41.npy,0,65536,0.0,Very Sparse
+mask_neg_42.npy,0,65536,0.0,Very Sparse
+mask_neg_43.npy,0,65536,0.0,Very Sparse
+mask_neg_44.npy,0,65536,0.0,Very Sparse
+mask_neg_45.npy,0,65536,0.0,Very Sparse
+mask_neg_46.npy,0,65536,0.0,Very Sparse
+mask_neg_47.npy,0,65536,0.0,Very Sparse
+mask_neg_48.npy,0,65536,0.0,Very Sparse
+mask_neg_49.npy,0,65536,0.0,Very Sparse
+mask_neg_5.npy,0,65536,0.0,Very Sparse
+mask_neg_50.npy,0,65536,0.0,Very Sparse
+mask_neg_51.npy,0,65536,0.0,Very Sparse
+mask_neg_52.npy,0,65536,0.0,Very Sparse
+mask_neg_53.npy,0,65536,0.0,Very Sparse
+mask_neg_54.npy,0,65536,0.0,Very Sparse
+mask_neg_55.npy,0,65536,0.0,Very Sparse
+mask_neg_56.npy,0,65536,0.0,Very Sparse
+mask_neg_57.npy,0,65536,0.0,Very Sparse
+mask_neg_58.npy,0,65536,0.0,Very Sparse
+mask_neg_59.npy,0,65536,0.0,Very Sparse
+mask_neg_6.npy,0,65536,0.0,Very Sparse
+mask_neg_60.npy,0,65536,0.0,Very Sparse
+mask_neg_61.npy,0,65536,0.0,Very Sparse
+mask_neg_62.npy,0,65536,0.0,Very Sparse
+mask_neg_63.npy,0,65536,0.0,Very Sparse
+mask_neg_64.npy,0,65536,0.0,Very Sparse
+mask_neg_65.npy,0,65536,0.0,Very Sparse
+mask_neg_66.npy,0,65536,0.0,Very Sparse
+mask_neg_67.npy,0,65536,0.0,Very Sparse
+mask_neg_68.npy,0,65536,0.0,Very Sparse
+mask_neg_69.npy,0,65536,0.0,Very Sparse
+mask_neg_7.npy,0,65536,0.0,Very Sparse
+mask_neg_70.npy,0,65536,0.0,Very Sparse
+mask_neg_71.npy,0,65536,0.0,Very Sparse
+mask_neg_72.npy,0,65536,0.0,Very Sparse
+mask_neg_73.npy,0,65536,0.0,Very Sparse
+mask_neg_74.npy,0,65536,0.0,Very Sparse
+mask_neg_75.npy,0,65536,0.0,Very Sparse
+mask_neg_76.npy,0,65536,0.0,Very Sparse
+mask_neg_77.npy,0,65536,0.0,Very Sparse
+mask_neg_78.npy,0,65536,0.0,Very Sparse
+mask_neg_79.npy,0,65536,0.0,Very Sparse
+mask_neg_8.npy,0,65536,0.0,Very Sparse
+mask_neg_80.npy,0,65536,0.0,Very Sparse
+mask_neg_81.npy,0,65536,0.0,Very Sparse
+mask_neg_82.npy,0,65536,0.0,Very Sparse
+mask_neg_83.npy,0,65536,0.0,Very Sparse
+mask_neg_84.npy,0,65536,0.0,Very Sparse
+mask_neg_85.npy,0,65536,0.0,Very Sparse
+mask_neg_86.npy,0,65536,0.0,Very Sparse
+mask_neg_87.npy,0,65536,0.0,Very Sparse
+mask_neg_88.npy,0,65536,0.0,Very Sparse
+mask_neg_89.npy,0,65536,0.0,Very Sparse
+mask_neg_9.npy,0,65536,0.0,Very Sparse
+mask_neg_90.npy,0,65536,0.0,Very Sparse
+mask_neg_91.npy,0,65536,0.0,Very Sparse
+mask_neg_92.npy,0,65536,0.0,Very Sparse
+mask_neg_93.npy,0,65536,0.0,Very Sparse
+mask_neg_94.npy,0,65536,0.0,Very Sparse
+mask_neg_95.npy,0,65536,0.0,Very Sparse
+mask_neg_96.npy,0,65536,0.0,Very Sparse
+mask_neg_97.npy,0,65536,0.0,Very Sparse
+mask_neg_98.npy,0,65536,0.0,Very Sparse
+mask_neg_99.npy,0,65536,0.0,Very Sparse

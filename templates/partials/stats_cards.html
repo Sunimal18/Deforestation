@@ -1,27 +1,27 @@
 <div class="stats-grid">
 
     <div class="stat-card">
-        <h4>Active Alerts</h4>
-        <h2>24</h2>
-        <p>+8 from last week</p>
+        <h4>Total Disturbances</h4>
+        <h2>{{ total_disturbances }}</h2>
+        <p>Polygons detected</p>
     </div>
 
     <div class="stat-card">
         <h4>Total Area Affected</h4>
-        <h2>124 ha</h2>
-        <p>Current month</p>
+        <h2>{{ total_area_ha }} ha</h2>
+        <p>Across all polygons</p>
     </div>
 
     <div class="stat-card">
-        <h4>Avg NDVI Change</h4>
-        <h2>-0.34</h2>
-        <p>Detected areas</p>
+        <h4>Avg Area</h4>
+        <h2>{{ avg_area_ha }} ha</h2>
+        <p>Per polygon</p>
     </div>
 
     <div class="stat-card">
-        <h4>Detection Accuracy</h4>
-        <h2>91.2%</h2>
-        <p>AI confidence</p>
+        <h4>Max Area</h4>
+        <h2>{{ max_area_ha }} ha</h2>
+        <p>Largest polygon</p>
     </div>
 
 </div>

@@ -84,7 +84,27 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             onEachFeature: function (feature, layer) {
                 let props = feature.properties;
-                layer.bindPopup(`<b>Area ${props.area_id}</b><br>Severity: ${props.severity.toUpperCase()}<br>NDVI Change: ${props.ndvi_change}<br>Detected: ${props.detection_date}`);
+                let badgeColor = getRiskColor(props.risk_class.toLowerCase());
+                let popupContent = `
+                    <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 13px; width: 280px; color: #1e293b;">
+                        <h4 style="margin: 0 0 8px 0; color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                            <span>Area ${props.area_id}</span>
+                            <span style="background: ${badgeColor}; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase;">${props.risk_class} Risk</span>
+                        </h4>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 6px;">
+                            <div style="display: flex; justify-content: space-between;"><b>Area affected:</b> <span>${parseFloat(props.area_ha).toFixed(3)} ha</span></div>
+                            <div style="display: flex; justify-content: space-between;"><b>Restoration Priority:</b> <span style="font-weight: 600; color: #059669;">${props.reforestation_priority}</span></div>
+                            <div style="display: flex; justify-content: space-between;"><b>Distance to Road:</b> <span>${Math.round(props.road_distance_m).toLocaleString()} m</span></div>
+                            <div style="display: flex; justify-content: space-between;"><b>Distance to Village:</b> <span>${Math.round(props.village_distance_m).toLocaleString()} m</span></div>
+                            <div style="display: flex; justify-content: space-between;"><b>Distance to Waterway:</b> <span>${Math.round(props.waterway_distance_m).toLocaleString()} m</span></div>
+                            <div style="display: flex; justify-content: space-between;"><b>Protected Area:</b> <span>${props.protected_area ? '✅ Yes' : '❌ No'}</span></div>
+                            <div style="margin-top: 6px; padding: 8px; background: #f8fafc; border-radius: 6px; border: 1px dashed #cbd5e1; font-size: 11.5px; line-height: 1.4; color: #475569;">
+                                <b>XAI Explanation:</b><br>${props.xai_explanation}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                layer.bindPopup(popupContent);
             }
         }).addTo(disturbanceLayer);
     }
@@ -239,6 +259,106 @@ document.addEventListener("DOMContentLoaded", function () {
                     },
                     x: {
                         grid: { display: false }
+                    }
+                }
+            }
+        });
+    }
+
+    // ==========================================
+    // 4. CHART.JS: REFORESTATION SUITABILITY & PRIORITY
+    // ==========================================
+    var suitabilityData = {};
+    var priorityData = {};
+    
+    try {
+        var suitabilityEl = document.getElementById('suitability-data');
+        if (suitabilityEl) {
+            suitabilityData = JSON.parse(suitabilityEl.textContent);
+        }
+    } catch (e) {
+        console.error("Error parsing suitability data:", e);
+    }
+    
+    try {
+        var priorityEl = document.getElementById('priority-data');
+        if (priorityEl) {
+            priorityData = JSON.parse(priorityEl.textContent);
+        }
+    } catch (e) {
+        console.error("Error parsing priority data:", e);
+    }
+
+    const suitabilityCtx = document.getElementById('suitabilityChart');
+    if (suitabilityCtx) {
+        new Chart(suitabilityCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Suitable', 'Moderately Suitable', 'Unsuitable'],
+                datasets: [{
+                    label: 'Sites Count',
+                    data: [
+                        suitabilityData['Suitable'] || 0,
+                        suitabilityData['Moderately Suitable'] || 0,
+                        suitabilityData['Unsuitable'] || 0
+                    ],
+                    backgroundColor: [
+                        '#10b981', // green
+                        '#f59e0b', // orange
+                        '#ef4444'  // red
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f1f5f9' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    }
+
+    const priorityCtx = document.getElementById('priorityChart');
+    if (priorityCtx) {
+        new Chart(priorityCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['High', 'Medium', 'Low'],
+                datasets: [{
+                    data: [
+                        priorityData['High'] || 0,
+                        priorityData['Medium'] || 0,
+                        priorityData['Low'] || 0
+                    ],
+                    backgroundColor: [
+                        '#dc2626', // dark red
+                        '#d97706', // dark orange/yellow
+                        '#16a34a'  // green
+                    ],
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            font: { size: 12 }
+                        }
                     }
                 }
             }

@@ -157,12 +157,24 @@
         <hr>
 
         <h2>Vegetation Trend (NDVI)</h2>
-
         <canvas id="ndviChart"></canvas>
+
+        <hr>
+
+        <h2>Reforestation Suitability</h2>
+        <canvas id="suitabilityChart"></canvas>
+
+        <hr>
+
+        <h2>Reforestation Priority</h2>
+        <canvas id="priorityChart"></canvas>
 
     </div>
 
 </div>
+
+{{ suitability_counts|json_script:"suitability-data" }}
+{{ priority_counts|json_script:"priority-data" }}
 
 <script src="{% static 'js/reforestation.js' %}?v=1.3"></script>
 
