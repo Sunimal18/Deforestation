@@ -28,6 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 60,
+                        ticks: {
+                            stepSize: 10
+                        }
+                    }
                 }
             }
         });
