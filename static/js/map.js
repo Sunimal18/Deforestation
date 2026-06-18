@@ -1,3 +1,4 @@
+window.mapAreaLayers = {};
 var map = L.map('map').setView([8.4583, 80.0417], 11);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -80,6 +81,9 @@ function updateDisturbanceLayer() {
         },
         onEachFeature: function (feature, layer) {
             let props = feature.properties;
+            if (props.area_id) {
+                window.mapAreaLayers[props.area_id] = layer;
+            }
             let badgeColor = getRiskColor(props.risk_class.toLowerCase());
             let popupContent = `
                 <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 13px; width: 280px; color: #1e293b;">
@@ -129,6 +133,9 @@ fetch('/dashboard/api/risk-areas/')
             },
             onEachFeature: function (feature, layer) {
                 let props = feature.properties;
+                if (props.area_id) {
+                    window.mapAreaLayers[props.area_id] = layer;
+                }
                 let popupContent = `
                     <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 13px; min-width: 150px;">
                         <h4 style="margin: 0 0 8px 0; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 4px;">Risk Area ${props.area_id}</h4>
@@ -227,4 +234,46 @@ document.addEventListener("DOMContentLoaded", function() {
             updateDisturbanceLayer();
         });
     }
-});
+
+    // Zoom and highlight area on alert click
+    document.addEventListener('click', function(e) {
+        const card = e.target.closest('.clickable-alert');
+        if (card) {
+            const areaId = card.getAttribute('data-area-id');
+            const alertType = card.getAttribute('data-alert-type');
+            if (areaId) {
+                window.zoomToArea(areaId, alertType);
+            }
+        }
+    });
+});
+
+window.zoomToArea = function(areaId, alertType) {
+    if (alertType === 'disturbance') {
+        const checkbox = document.getElementById('layer-disturbance');
+        if (checkbox && !checkbox.checked) {
+            checkbox.checked = true;
+            map.addLayer(disturbanceLayer);
+        }
+    } else if (alertType === 'risk') {
+        const checkbox = document.getElementById('layer-risk');
+        if (checkbox && !checkbox.checked) {
+            checkbox.checked = true;
+            map.addLayer(riskLayer);
+        }
+    }
+
+    const layer = window.mapAreaLayers[areaId];
+    if (layer) {
+        if (typeof layer.getBounds === 'function') {
+            map.fitBounds(layer.getBounds(), { maxZoom: 14 });
+        } else if (typeof layer.getLatLng === 'function') {
+            map.setView(layer.getLatLng(), 14);
+        }
+        setTimeout(() => {
+            layer.openPopup();
+        }, 300);
+    } else {
+        console.warn(`Layer for area_id ${areaId} not found.`);
+    }
+};

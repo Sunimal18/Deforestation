@@ -29,8 +29,32 @@ body {
 }
 
 .sidebar label {
-    display: block;
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+}
+
+#layer-disturbance {
+    accent-color: #ef4444;
+}
+
+#layer-risk {
+    accent-color: #f97316;
+}
+
+#layer-reforestation {
+    accent-color: #10b981;
+}
+
+.sidebar input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
 }
 
 .sidebar select,
@@ -82,6 +106,15 @@ body {
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 8px;
+}
+
+.clickable-alert {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable-alert:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .alert-card h4 {
