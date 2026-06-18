@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     label: 'High Risk Areas',
                     data: data12,
                     backgroundColor: '#f7933a',
-                    borderRadius: 5
+                    borderRadius: 5,
+                    maxBarThickness: 40
                 }]
             },
             options: {
