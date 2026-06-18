@@ -19,7 +19,7 @@
 
     <div class="page-header">
         <div>
-            <h1>Risk Prediction Analysis</h1>
+            <h1>Risk Prediction Analysis <span id="period-header-suffix" style="color: #6b7280; font-size: 24px; font-weight: 400;">(Next 12 Months)</span></h1>
             <p>AI-powered deforestation risk assessment for Wilpattu Forest</p>
         </div>
 
@@ -106,7 +106,7 @@
                     </td>
                     <td><span class="badge {{ area.risk_level }}">{{ area.get_risk_level_display }}</span></td>
                     <td>{{ area.primary_factors }}</td>
-                    <td><a href="#">View Details</a></td>
+                    <td><a href="#details-panel" class="view-details-btn" data-area-id="{{ area.area_id }}" data-risk-score="{{ area.risk_score }}" data-risk-level="{{ area.get_risk_level_display }}" data-factors="{{ area.primary_factors }}">View Details</a></td>
                 </tr>
                 {% empty %}
                 <tr>
@@ -115,6 +115,24 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+
+    <!-- Detailed Risk Analysis Panel -->
+    <div class="table-card" id="details-panel" style="display: none; margin-top: 30px; border-left: 5px solid #ef4444; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,.08); border-radius: 15px;">
+        <h2 id="details-title" style="margin-bottom: 15px; font-size: 20px;">Detailed Risk Analysis: Area WNP-10</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 14px; line-height: 1.6;">
+            <div>
+                <p style="margin-bottom: 8px;"><b>Area ID:</b> <span id="details-area-id">WNP-10</span></p>
+                <p style="margin-bottom: 8px;"><b>Risk Score:</b> <span id="details-risk-score">85</span>%</p>
+                <p style="margin-bottom: 8px;"><b>Risk Level:</b> <span id="details-risk-level" class="badge high">High</span></p>
+            </div>
+            <div>
+                <p style="margin-bottom: 8px;"><b>Primary Threat Factors:</b></p>
+                <p id="details-factors" style="color: #4b5563; font-style: italic; margin-bottom: 12px;">Proximity to road, logging activity</p>
+                <p style="margin-top: 10px; margin-bottom: 4px;"><b>AI Risk Analysis & Threat Action Plan:</b></p>
+                <p id="details-action-text" style="color: #111827;">Infrastructure expansion increases accessibility for illegal activities in this buffer sector. Recommendations: Deploy active UAV patrols, maintain strict forestry boundary checks, and analyze satellite temporal changes weekly.</p>
+            </div>
+        </div>
     </div>
 
     <!-- Risk Factors -->
