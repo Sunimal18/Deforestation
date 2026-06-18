@@ -23,9 +23,9 @@
             <p>AI-powered deforestation risk assessment for Wilpattu Forest</p>
         </div>
 
-        <select class="period-select">
-            <option>Next 6 Months</option>
-            <option>Next 12 Months</option>
+        <select class="period-select" id="filter-period">
+            <option value="6">Next 6 Months</option>
+            <option value="12" selected>Next 12 Months</option>
         </select>
     </div>
 
@@ -37,7 +37,7 @@
             <div class="icon danger">⚠</div>
             <div>
                 <h4>High Risk Areas</h4>
-                <h2>{{ high_risk_count }}</h2>
+                <h2 id="high-risk-count">{{ high_risk_count }}</h2>
                 <span>AI designated high-alert</span>
             </div>
         </div>
