@@ -16,9 +16,172 @@
         <li class="{% if request.path == '/dashboard/reports/' %}active{% endif %}"><a href="/dashboard/reports/">Reports</a></li>
     </ul>
 
-    <div class="nav-icons">
-        <span>🔔</span>
-        <span>👤</span>
+    <div class="nav-icons" style="position: relative; display: flex; align-items: center; gap: 20px;">
+        <!-- Bell Icon with Dropdown Wrapper -->
+        <div class="nav-icon-wrapper" style="position: relative; display: inline-block;">
+            <span id="nav-bell-btn" style="position: relative; display: inline-block; font-size: 20px; cursor: pointer; user-select: none;">
+                🔔
+                <span id="nav-alert-badge" style="position: absolute; top: -2px; right: -2px; background: #ef4444; border: 2px solid white; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+            </span>
+            
+            <!-- Alerts Dropdown Overlay -->
+            <div id="nav-alerts-dropdown" class="nav-dropdown" style="display: none; position: absolute; right: -80px; top: 40px; width: 330px; background: white; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); z-index: 1001; font-family: 'Segoe UI', system-ui, sans-serif; text-align: left;">
+                <div style="padding: 14px 18px; border-bottom: 1px solid #f3f4f6; font-weight: 700; font-size: 14.5px; color: #1f2937; display: flex; justify-content: space-between; align-items: center;">
+                    <span>System Alerts</span>
+                    <span style="font-size: 11px; font-weight: 600; background: #fee2e2; color: #ef4444; padding: 2px 8px; border-radius: 20px;" id="nav-alert-count">0 Detections</span>
+                </div>
+                <div id="nav-alerts-list" style="max-height: 290px; overflow-y: auto; padding: 6px 0;">
+                    <div style="padding: 20px; text-align: center; color: #9ca3af; font-size: 13px;">Loading new alerts...</div>
+                </div>
+                <div style="padding: 12px; border-top: 1px solid #f3f4f6; text-align: center; background: #f9fafb; border-radius: 0 0 12px 12px;">
+                    <a href="/disturbance-detection/" style="text-decoration: none; color: #16a34a; font-weight: 700; font-size: 12px; transition: color 0.2s;" onmouseover="this.style.color='#15803d'" onmouseout="this.style.color='#16a34a'">View All Detections</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Icon with Dropdown Wrapper -->
+        <div class="nav-icon-wrapper" style="position: relative; display: inline-block;">
+            <span id="nav-profile-btn" style="display: inline-block; font-size: 20px; cursor: pointer; user-select: none;">👤</span>
+            
+            <!-- Profile Dropdown Overlay -->
+            <div id="nav-profile-dropdown" class="nav-dropdown" style="display: none; position: absolute; right: 0; top: 40px; width: 260px; background: white; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); z-index: 1001; font-family: 'Segoe UI', system-ui, sans-serif; text-align: left;">
+                <div style="padding: 16px 18px; border-bottom: 1px solid #f3f4f6; display: flex; align-items: center; gap: 14px;">
+                    <div style="background: #16a34a; border-radius: 50%; width: 42px; height: 42px; display: flex; justify-content: center; align-items: center; font-size: 20px; font-weight: 700; color: white; text-transform: uppercase;">
+                        {{ request.user.username|slice:":1"|default:"A" }}
+                    </div>
+                    <div>
+                        <h4 style="margin: 0; font-size: 15px; font-weight: 700; color: #111827;">{{ request.user.username|default:"admin" }}</h4>
+                        <span style="font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">
+                            {% if request.user.is_superuser %}Super Administrator{% else %}Conservation Officer{% endif %}
+                        </span>
+                    </div>
+                </div>
+                <div style="padding: 14px 18px; font-size: 12.5px; color: #4b5563; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid #f3f4f6;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #9ca3af; font-weight: 500;">Email</span> 
+                        <span style="color: #1f2937; font-weight: 600;">{{ request.user.email|default:"admin@example.com" }}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #9ca3af; font-weight: 500;">Status</span> 
+                        <span style="color: #16a34a; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+                            <span style="width: 6px; height: 6px; background: #16a34a; border-radius: 50%; display: inline-block;"></span>Active
+                        </span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #9ca3af; font-weight: 500;">Joined</span> 
+                        <span style="color: #1f2937; font-weight: 600;">{{ request.user.date_joined|date:"Y-m-d"|default:"2026-06-21" }}</span>
+                    </div>
+                </div>
+                <div style="padding: 8px; text-align: center; background: #fafafa; border-radius: 0 0 12px 12px;">
+                    <a href="/logout/" style="display: block; text-decoration: none; color: #ef4444; font-weight: 700; font-size: 13px; padding: 8px; border-radius: 6px; transition: all 0.2s;" onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background='transparent'">Logout Account</a>
+                </div>
+            </div>
+        </div>
     </div>
 
 </nav>
+
+<!-- JavaScript to handle dropdown toggle and alerts population -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var bellBtn = document.getElementById("nav-bell-btn");
+    var bellDropdown = document.getElementById("nav-alerts-dropdown");
+    var profileBtn = document.getElementById("nav-profile-btn");
+    var profileDropdown = document.getElementById("nav-profile-dropdown");
+    
+    var alertBadge = document.getElementById("nav-alert-badge");
+    var alertCount = document.getElementById("nav-alert-count");
+    var alertsList = document.getElementById("nav-alerts-list");
+
+    // Toggle dropdowns
+    bellBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        profileDropdown.style.display = "none";
+        bellDropdown.style.display = bellDropdown.style.display === "none" ? "block" : "none";
+    });
+
+    profileBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        bellDropdown.style.display = "none";
+        profileDropdown.style.display = profileDropdown.style.display === "none" ? "block" : "none";
+    });
+
+    // Close dropdowns when clicking anywhere outside
+    document.addEventListener("click", function(e) {
+        if (!bellDropdown.contains(e.target) && e.target !== bellBtn && !bellBtn.contains(e.target)) {
+            bellDropdown.style.display = "none";
+        }
+        if (!profileDropdown.contains(e.target) && e.target !== profileBtn && !profileBtn.contains(e.target)) {
+            profileDropdown.style.display = "none";
+        }
+    });
+
+    // Fetch alerts dynamically from the disturbances API
+    fetch('/dashboard/api/disturbances/')
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+            if (data && data.features && data.features.length > 0) {
+                // Sort features by date descending to show the newest detections first
+                var sortedFeatures = data.features.sort(function(a, b) {
+                    return b.properties.detection_date.localeCompare(a.properties.detection_date);
+                });
+
+                // Take top 4 alerts to display in the dropdown
+                var displayAlerts = sortedFeatures.slice(0, 4);
+                
+                alertBadge.style.display = "block";
+                alertCount.innerText = data.features.length + " Alerts";
+
+                alertsList.innerHTML = "";
+                displayAlerts.forEach(function(feature) {
+                    var props = feature.properties;
+                    var item = document.createElement("div");
+                    
+                    item.style.padding = "12px 18px";
+                    item.style.borderBottom = "1px solid #f3f4f6";
+                    item.style.fontSize = "12.5px";
+                    item.style.cursor = "pointer";
+                    item.style.transition = "background-color 0.2s";
+                    
+                    var severityColor = props.severity === 'high' ? '#ef4444' : (props.severity === 'moderate' ? '#f59e0b' : '#3b82f6');
+                    var explanation = props.xai_explanation ? props.xai_explanation.substring(0, 75) + '...' : 'New deforestation threat detected in the study area.';
+                    
+                    item.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700; margin-bottom: 3px; color: #111827;">
+                            <span>Area ${props.area_id}</span>
+                            <span style="background: ${severityColor}; color: white; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">${props.severity}</span>
+                        </div>
+                        <div style="color: #4b5563; line-height: 1.45; font-size: 11.5px; margin-bottom: 4px;">
+                            ${explanation}
+                        </div>
+                        <div style="font-size: 10px; color: #9ca3af; display: flex; align-items: center; gap: 4px;">
+                            <span>📅</span> Detected: ${props.detection_date}
+                        </div>
+                    `;
+                    
+                    item.addEventListener("mouseover", function() {
+                        item.style.backgroundColor = "#f9fafb";
+                    });
+                    item.addEventListener("mouseout", function() {
+                        item.style.backgroundColor = "transparent";
+                    });
+                    
+                    // Clicking an alert takes the user directly to the disturbance portal
+                    item.addEventListener("click", function() {
+                        window.location.href = "/disturbance-detection/";
+                    });
+                    
+                    alertsList.appendChild(item);
+                });
+            } else {
+                alertsList.innerHTML = '<div style="padding: 24px; text-align: center; color: #9ca3af; font-size: 13px;">No new alerts.</div>';
+            }
+        })
+        .catch(function(err) {
+            console.error("Error loading alerts for navbar:", err);
+            alertsList.innerHTML = '<div style="padding: 20px; text-align: center; color: #ef4444; font-size: 13px;">Failed to load alerts.</div>';
+        });
+});
+</script>
