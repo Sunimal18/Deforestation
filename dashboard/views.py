@@ -130,3 +130,152 @@ def api_risk_areas(request):
         "features": features
     }
     return JsonResponse(geojson)
+
+def monthly_report(request):
+    from django.db.models import Sum, Count, Avg
+    from datetime import date
+    import json
+    
+    # Get month parameter, e.g. "2026-06"
+    month_param = request.GET.get('month', '2026-06')
+    try:
+        year, month = map(int, month_param.split('-'))
+    except ValueError:
+        year, month = 2026, 6
+        
+    report_date = date(year, month, 1)
+    month_name = report_date.strftime('%B %Y')
+    
+    # 1. Query current month disturbances
+    current_disturbances = DisturbanceArea.objects.filter(detection_date__year=year, detection_date__month=month)
+    current_count = current_disturbances.count()
+    current_area = current_disturbances.aggregate(total=Sum('area_ha'))['total'] or 0.0
+    
+    # Risk distributions
+    high_risk_count = current_disturbances.filter(risk_class__iexact='high').count()
+    medium_risk_count = current_disturbances.filter(risk_class__iexact='moderate').count()
+    low_risk_count = current_disturbances.filter(risk_class__iexact='low').count()
+    
+    # Reforestation priority
+    high_priority_reforest = current_disturbances.filter(reforestation_priority__iexact='high').count()
+    medium_priority_reforest = current_disturbances.filter(reforestation_priority__iexact='medium').count()
+    low_priority_reforest = current_disturbances.filter(reforestation_priority__iexact='low').count()
+    
+    # 2. Query previous month (May 2026) for comparison
+    prev_month = month - 1 if month > 1 else 12
+    prev_year = year if month > 1 else year - 1
+    
+    prev_disturbances = DisturbanceArea.objects.filter(detection_date__year=prev_year, detection_date__month=prev_month)
+    prev_count = prev_disturbances.count()
+    prev_area = prev_disturbances.aggregate(total=Sum('area_ha'))['total'] or 0.0
+    
+    # Percentage changes
+    count_change_pct = 0.0
+    if prev_count > 0:
+        count_change_pct = ((current_count - prev_count) / prev_count) * 100
+        
+    area_change_pct = 0.0
+    if prev_area > 0:
+        area_change_pct = ((current_area - prev_area) / prev_area) * 100
+        
+    # 3. Top 10 High Risk Disturbances
+    top_disturbances = current_disturbances.order_by('-risk_score')[:10]
+    
+    # 4. Vulnerability Class Counts (using severity categories as class mappings)
+    vuln_high = current_disturbances.filter(severity='high').count()
+    vuln_mod = current_disturbances.filter(severity='moderate').count()
+    vuln_low = current_disturbances.filter(severity='low').count()
+    
+    # 5. Reforestation Recommendations
+    reforest_recommendations = current_disturbances.filter(reforestation_priority__isnull=False).exclude(reforestation_priority='').order_by('-area_ha')[:5]
+    
+    # 6. Explainability Reports
+    xai_reports = current_disturbances.filter(xai_explanation__isnull=False).exclude(xai_explanation='').order_by('-risk_score')[:3]
+    
+    # 7. Protected Area Impact
+    inside_protected = current_disturbances.filter(protected_area=True).count()
+    outside_protected = current_disturbances.filter(protected_area=False).count()
+    
+    # 8. Recommended Field Visits (Patrol routing based on threats)
+    field_visits = []
+    for idx, dist in enumerate(current_disturbances.order_by('-risk_score')[:5]):
+        reasons = []
+        if dist.risk_score and dist.risk_score >= 0.70:
+            reasons.append("High Risk Score")
+        if dist.area_ha and dist.area_ha >= 2.0:
+            reasons.append("Large Disturbed Area")
+        if dist.protected_area:
+            reasons.append("Protected Area Core Impact")
+        if dist.village_distance_m and dist.village_distance_m < 800:
+            reasons.append("Near Settlement Boundary")
+            
+        reason_str = " + ".join(reasons) if reasons else "Routine Inspection"
+        field_visits.append({
+            'site': f"Site {chr(65 + idx)} (Polygon {dist.area_id})",
+            'reason': reason_str
+        })
+        
+    # 9. Monthly Trend Analysis (Last 6 Months: Jan to Jun 2026)
+    trends = []
+    months_list = [
+        (2026, 1, 'Jan'),
+        (2026, 2, 'Feb'),
+        (2026, 3, 'Mar'),
+        (2026, 4, 'Apr'),
+        (2026, 5, 'May'),
+        (2026, 6, 'Jun'),
+    ]
+    for y, m, name in months_list:
+        m_dists = DisturbanceArea.objects.filter(detection_date__year=y, detection_date__month=m)
+        trends.append({
+            'month': name,
+            'count': m_dists.count(),
+            'area': round(m_dists.aggregate(total=Sum('area_ha'))['total'] or 0.0, 1)
+        })
+        
+    # 10. GeoJSON features for the map
+    features = []
+    for dist in current_disturbances:
+        features.append({
+            "type": "Feature",
+            "properties": {
+                "area_id": dist.area_id,
+                "severity": dist.severity,
+                "risk_class": dist.risk_class,
+                "area_ha": dist.area_ha,
+            },
+            "geometry": dist.geometry
+        })
+    report_geojson = json.dumps({
+        "type": "FeatureCollection",
+        "features": features
+    })
+    
+    context = {
+        'month_param': month_param,
+        'month_name': month_name,
+        'current_count': current_count,
+        'current_area': round(current_area, 1),
+        'high_risk_count': high_risk_count,
+        'medium_risk_count': medium_risk_count,
+        'low_risk_count': low_risk_count,
+        'high_priority_reforest': high_priority_reforest,
+        'medium_priority_reforest': medium_priority_reforest,
+        'low_priority_reforest': low_priority_reforest,
+        'prev_count': prev_count,
+        'prev_area': round(prev_area, 1),
+        'count_change_pct': round(count_change_pct, 1),
+        'area_change_pct': round(area_change_pct, 1),
+        'top_disturbances': top_disturbances,
+        'vuln_high': vuln_high,
+        'vuln_mod': vuln_mod,
+        'vuln_low': vuln_low,
+        'reforest_recommendations': reforest_recommendations,
+        'xai_reports': xai_reports,
+        'inside_protected': inside_protected,
+        'outside_protected': outside_protected,
+        'field_visits': field_visits,
+        'trends': trends,
+        'report_geojson': report_geojson,
+    }
+    return render(request, 'dashboard/monthly_report.html', context)

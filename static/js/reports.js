@@ -350,6 +350,19 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('filter-end-date').addEventListener('change', filterAndRender);
         document.getElementById('filter-region').addEventListener('change', filterAndRender);
 
+        // Bind Monthly Report button
+        var btnMonthlyReport = document.getElementById('btn-monthly-report');
+        if (btnMonthlyReport) {
+            btnMonthlyReport.addEventListener('click', function() {
+                var endDateVal = document.getElementById('filter-end-date').value;
+                var monthStr = "2026-06"; // Default
+                if (endDateVal) {
+                    monthStr = endDateVal.substring(0, 7); // Get YYYY-MM
+                }
+                window.open('/dashboard/reports/monthly/?month=' + monthStr, '_blank');
+            });
+        }
+
         // Bind PDF Download button
         var btnDownloadPdf = document.getElementById('btn-download-pdf');
         if (btnDownloadPdf) {

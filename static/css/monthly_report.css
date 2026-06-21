@@ -1,0 +1,304 @@
+/* ===================================================
+   FOREST-AI MONTHLY MONITORING REPORT PRINT SYSTEM
+   =================================================== */
+
+:root {
+    --primary-color: #15803d;
+    --primary-light: #f0fdf4;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --border-color: #cbd5e1;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+body.report-body {
+    background: #f8fafc;
+    color: var(--text-main);
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sticky top toolbar on screen, hidden on print */
+.report-toolbar {
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.report-toolbar h4 {
+    margin: 0;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.btn-report {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+}
+
+.btn-report-print {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-report-print:hover {
+    background: #166534;
+}
+
+.btn-report-back {
+    background: white;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+}
+
+.btn-report-back:hover {
+    background: #f1f5f9;
+}
+
+/* Document Container */
+.report-document {
+    background: white;
+    max-width: 800px;
+    margin: 25px auto;
+    padding: 50px 60px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    min-height: 1000px;
+}
+
+/* Report Header */
+.report-header {
+    border-bottom: 3px double var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.report-header-left h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0 0 6px 0;
+}
+
+.report-header-left h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.report-header-right {
+    text-align: right;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* General Layout & Typography */
+.report-section {
+    margin-bottom: 35px;
+}
+
+.report-section h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+    border-bottom: 1.5px solid var(--border-color);
+    padding-bottom: 6px;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.report-text {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0 0 12px 0;
+    text-align: justify;
+}
+
+/* Dynamic Tables styling */
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+
+.report-table th, 
+.report-table td {
+    padding: 10px 14px;
+    font-size: 12.5px;
+    border: 1px solid var(--border-color);
+}
+
+.report-table th {
+    background: #f8fafc;
+    color: var(--text-main);
+    font-weight: 600;
+    text-align: left;
+}
+
+.report-table td.num-col,
+.report-table th.num-col {
+    text-align: right;
+}
+
+.report-table td.center-col,
+.report-table th.center-col {
+    text-align: center;
+}
+
+.report-table tr:hover td {
+    background: #fdfdfd;
+}
+
+/* Specific component containers */
+#report-map {
+    width: 100%;
+    height: 380px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 12px;
+    background: #f1f5f9;
+}
+
+.map-caption {
+    font-size: 11.5px;
+    font-style: italic;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 6px;
+}
+
+/* Row of charts/tables */
+.report-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.report-grid-card {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.report-grid-card h4 {
+    margin: 0 0 12px 0;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main);
+}
+
+/* XAI Card Styles */
+.xai-card {
+    background: #f8fafc;
+    border-left: 3px solid var(--primary-color);
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    border-radius: 0 4px 4px 0;
+}
+
+.xai-card h5 {
+    margin: 0 0 6px 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.xai-card ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.xai-card li {
+    margin-bottom: 4px;
+}
+
+/* Badges styling */
+.badge-rep {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.badge-rep-high { background: #fee2e2; color: #ef4444; }
+.badge-rep-med { background: #fef3c7; color: #d97706; }
+.badge-rep-low { background: #d1fae5; color: #065f46; }
+
+/* ===================================================
+   MEDIA PRINT RULES (A4 Optimized)
+   =================================================== */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 1.5cm 1.5cm 1.5cm 1.5cm;
+    }
+
+    body.report-body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .report-toolbar {
+        display: none !important; /* Hide screen buttons */
+    }
+
+    .report-document {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Page Breaks for clean layout */
+    .page-break {
+        page-break-before: always;
+        break-before: page;
+        padding-top: 1cm;
+    }
+
+    .report-section {
+        page-break-inside: avoid;
+    }
+
+    .report-table {
+        page-break-inside: avoid;
+    }
+
+    #report-map {
+        height: 350px !important;
+        page-break-inside: avoid;
+    }
+}
