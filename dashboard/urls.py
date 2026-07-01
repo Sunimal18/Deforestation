@@ -8,6 +8,7 @@ urlpatterns = [
     path('reports/monthly/', views.monthly_report, name='monthly_report'),
     path('api/disturbances/', views.api_disturbances, name='api_disturbances'),
     path('api/risk-areas/', views.api_risk_areas, name='api_risk_areas'),
+    path('api/gee-tile-url/', views.api_gee_tile_url, name='api_gee_tile_url'),
 ]
 
 

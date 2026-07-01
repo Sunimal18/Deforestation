@@ -279,3 +279,60 @@ def monthly_report(request):
         'report_geojson': report_geojson,
     }
     return render(request, 'dashboard/monthly_report.html', context)
+
+
+_ee_initialized = False
+
+def initialize_ee():
+    global _ee_initialized
+    if _ee_initialized:
+        return
+    import ee
+    import json
+    import os
+    
+    gee_credentials_json = os.getenv('GEE_CREDENTIALS_JSON', '')
+    if gee_credentials_json:
+        credentials_dict = json.loads(gee_credentials_json)
+        credentials = ee.ServiceAccountCredentials(
+            credentials_dict['client_email'],
+            key_data=gee_credentials_json
+        )
+        ee.Initialize(credentials)
+    else:
+        # Fallback to local user credentials (if run locally with gcloud auth)
+        ee.Initialize()
+    _ee_initialized = True
+
+def api_gee_tile_url(request):
+    import ee
+    try:
+        initialize_ee()
+        
+        # Wilpattu bounding box
+        aoi = ee.Geometry.Rectangle([79.82, 8.12, 80.25, 8.65])
+        
+        # Query Sentinel-2 Surface Reflectance
+        s2_collection = (ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
+                         .filterBounds(aoi)
+                         .filterDate('2026-06-01', '2026-06-30')
+                         .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 10))
+                         .sort('system:time_start', False))
+        
+        # Create median composite clipped to our Area of Interest
+        image = s2_collection.median().clip(aoi)
+        
+        # True color visualization parameters
+        vis_params = {
+            'bands': ['B4', 'B3', 'B2'],
+            'min': 0,
+            'max': 3000,
+            'gamma': 1.4
+        }
+        
+        map_info = image.getMapId(vis_params)
+        tile_url = map_info['tile_fetcher'].url_format
+        
+        return JsonResponse({'tile_url': tile_url})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

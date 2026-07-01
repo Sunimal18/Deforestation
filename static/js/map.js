@@ -10,6 +10,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var disturbanceLayer = L.layerGroup().addTo(map);
 var riskLayer = L.layerGroup().addTo(map);
 var reforestationLayer = L.layerGroup().addTo(map);
+var satelliteLayer = L.layerGroup(); // Loaded lazily on toggle
 
 // Colors for severity levels
 function getSeverityColor(severity) {
@@ -201,6 +202,45 @@ document.addEventListener("DOMContentLoaded", function() {
                 map.addLayer(reforestationLayer);
             } else {
                 map.removeLayer(reforestationLayer);
+            }
+        });
+    }
+
+    var checkSatellite = document.getElementById('layer-satellite');
+    var satelliteTileLayer = null;
+
+    if (checkSatellite) {
+        checkSatellite.addEventListener('change', function() {
+            if (this.checked) {
+                if (!satelliteTileLayer) {
+                    // Show a visual loading indicator or console log
+                    console.log("Fetching satellite imagery tiles from Google Earth Engine...");
+                    
+                    fetch('/dashboard/api/gee-tile-url/')
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data && data.tile_url) {
+                                satelliteTileLayer = L.tileLayer(data.tile_url, {
+                                    maxZoom: 19,
+                                    attribution: '© Google Earth Engine / Sentinel-2'
+                                });
+                                satelliteLayer.addLayer(satelliteTileLayer);
+                                map.addLayer(satelliteLayer);
+                            } else if (data.error) {
+                                alert("Google Earth Engine error: " + data.error);
+                                checkSatellite.checked = false;
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error fetching GEE tiles:", error);
+                            alert("Failed to connect to Google Earth Engine service. Please check your credentials.");
+                            checkSatellite.checked = false;
+                        });
+                } else {
+                    map.addLayer(satelliteLayer);
+                }
+            } else {
+                map.removeLayer(satelliteLayer);
             }
         });
     }
