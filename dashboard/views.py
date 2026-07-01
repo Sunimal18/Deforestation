@@ -338,4 +338,13 @@ def api_gee_tile_url(request):
         return JsonResponse({'error': str(e)}, status=500)
 
 def user_manual(request):
-    return render(request, 'dashboard/user_manual.html')
+    import os
+    from django.http import FileResponse, Http404
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    pdf_path = os.path.join(base_dir, 'static', 'docs', 'FOREST-AI_User_Manual.pdf')
+    if os.path.exists(pdf_path):
+        response = FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="FOREST-AI_User_Manual.pdf"'
+        return response
+    else:
+        raise Http404("User Manual PDF not found.")

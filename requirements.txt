@@ -14,3 +14,4 @@ gunicorn==23.0.0
 whitenoise==6.8.2
 earthengine-api
 google-api-python-client
+reportlab
