@@ -44,7 +44,7 @@ function updateDisturbanceLayer() {
     var endYearSelect = document.getElementById('filter-end-year');
     var slider = document.getElementById('filter-year-slider');
     
-    var startYear = startYearSelect ? parseInt(startYearSelect.value) : 2010;
+    var startYear = startYearSelect ? parseInt(startYearSelect.value) : 2019;
     var endYear = endYearSelect ? parseInt(endYearSelect.value) : 2026;
     
     // Auto-adjust if start > end
