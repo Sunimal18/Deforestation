@@ -348,3 +348,63 @@ def user_manual(request):
         return response
     else:
         raise Http404("User Manual PDF not found.")
+
+def api_send_monthly_report_email(request):
+    import datetime
+    from django.conf import settings
+    from django.core.mail import EmailMessage
+    from django.http import JsonResponse
+    from .utils import generate_monthly_report_pdf
+
+    # Check if request is GAE cron trigger
+    is_cron = request.headers.get('X-Appengine-Cron') == 'true'
+
+    # Manual triggers must be authenticated
+    if not is_cron and not request.user.is_authenticated:
+        return JsonResponse({'error': 'Authentication required.'}, status=401)
+
+    today = datetime.date.today()
+
+    if is_cron:
+        # Check if today is the last day of the month (tomorrow is day 1 of next month)
+        tomorrow = today + datetime.timedelta(days=1)
+        if tomorrow.month == today.month:
+            return JsonResponse({
+                'status': 'skipped',
+                'message': 'Skipped. Automated email cron checks run daily but only execute on the last day of the month.'
+            })
+        target_year = today.year
+        target_month = today.month
+    else:
+        # Manual query parameters
+        target_year = int(request.GET.get('year', today.year))
+        target_month = int(request.GET.get('month', today.month))
+
+    try:
+        month_name = datetime.date(target_year, target_month, 1).strftime("%B %Y")
+        
+        # Compile report PDF on the fly
+        pdf_buffer = generate_monthly_report_pdf(target_year, target_month)
+        
+        recipient = settings.REPORT_RECIPIENT_EMAIL
+        
+        email = EmailMessage(
+            subject=f"FOREST-AI: Monthly Deforestation & Land Cover Report - {month_name}",
+            body=f"Please find attached the FOREST-AI Monthly Conservation Monitoring Report for {month_name}.\n\n"
+                 f"This is an automated report compiled from forest cover change telemetries.\n\n"
+                 f"Best regards,\nFOREST-AI System Alert",
+            from_email=settings.DEFAULT_FROM_EMAIL or 'forest.ai.alerts@gmail.com',
+            to=[recipient],
+        )
+        
+        filename = f"FOREST-AI_Monitoring_Report_{month_name.replace(' ', '_')}.pdf"
+        email.attach(filename, pdf_buffer.getvalue(), 'application/pdf')
+        
+        email.send(fail_silently=False)
+        
+        return JsonResponse({
+            'status': 'success',
+            'message': f"Monthly report email for {month_name} sent successfully to {recipient}!"
+        })
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'error': str(e)}, status=500)

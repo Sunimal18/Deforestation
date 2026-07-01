@@ -1,0 +1,4 @@
+cron:
+- description: "Daily Deforestation Report Last-Day-Of-Month Email Check"
+  url: /dashboard/api/send-monthly-report-email/
+  schedule: "every day 23:59"

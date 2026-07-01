@@ -371,6 +371,45 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
+        // Bind Email Report button
+        var btnEmailReport = document.getElementById('btn-email-report');
+        if (btnEmailReport) {
+            btnEmailReport.addEventListener('click', function() {
+                var startVal = document.getElementById('filter-start-date').value;
+                if (!startVal) {
+                    alert("Please select a valid date first.");
+                    return;
+                }
+                var dateObj = new Date(startVal);
+                var year = dateObj.getFullYear();
+                var month = dateObj.getMonth() + 1;
+
+                btnEmailReport.disabled = true;
+                var originalText = btnEmailReport.innerText;
+                btnEmailReport.innerText = "Sending...";
+
+                fetch('/dashboard/api/send-monthly-report-email/?year=' + year + '&month=' + month)
+                    .then(response => response.json())
+                    .then(data => {
+                        btnEmailReport.disabled = false;
+                        btnEmailReport.innerText = originalText;
+                        if (data && data.status === 'success') {
+                            alert(data.message);
+                        } else if (data && data.error) {
+                            alert("Failed to send report email: " + data.error);
+                        } else {
+                            alert("An unexpected error occurred while sending the email.");
+                        }
+                    })
+                    .catch(error => {
+                        btnEmailReport.disabled = false;
+                        btnEmailReport.innerText = originalText;
+                        console.error("Error sending report email:", error);
+                        alert("Network connection error. Failed to send email.");
+                    });
+            });
+        }
+
         // Bind CSV Export button
         var btnExportCsv = document.getElementById('btn-export-csv');
         if (btnExportCsv) {

@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/risk-areas/', views.api_risk_areas, name='api_risk_areas'),
     path('api/gee-tile-url/', views.api_gee_tile_url, name='api_gee_tile_url'),
     path('user-manual/', views.user_manual, name='user_manual'),
+    path('api/send-monthly-report-email/', views.api_send_monthly_report_email, name='api_send_monthly_report_email'),
 ]
 
 
