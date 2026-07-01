@@ -1,4 +1,4 @@
-runtime:python311
+runtime: python311
 entrypoint: gunicorn -b :$PORT config.wsgi
 
 # In App Engine, you can configure your Supabase database credentials directly
