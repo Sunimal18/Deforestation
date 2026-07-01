@@ -101,7 +101,7 @@ db_port = os.getenv('DB_PORT', '6543')
 use_sqlite = False
 if not db_host:
     use_sqlite = True
-else:
+elif 'GAE_APPLICATION' not in os.environ:
     try:
         # Check database reachability via socket connection
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
