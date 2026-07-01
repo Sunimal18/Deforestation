@@ -1,0 +1,13 @@
+runtime:python311
+entrypoint: gunicorn -b :$PORT config.wsgi
+
+# In App Engine, you can configure your Supabase database credentials directly
+# here, or set them securely in the Google Cloud Console.
+env_variables:
+  DEBUG: "False"
+  ALLOWED_HOSTS: "*"
+  DB_NAME: "postgres"
+  DB_USER: "postgres.nxplnygqfotgttuvzqpl"
+  DB_PASSWORD: "Sunna@123#A"
+  DB_HOST: "aws-1-ap-southeast-1.pooler.supabase.com"
+  DB_PORT: "6543"
