@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/navbar.css' %}?v=1.4">
-    <link rel="stylesheet" href="{% static 'css/reports.css' %}?v=1.5">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}?v=1.6">
+    <link rel="stylesheet" href="{% static 'css/reports.css' %}?v=1.6">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Monitoring Reports - FOREST-AI</title>
@@ -20,9 +20,9 @@
                 <h1>Monitoring Reports</h1>
             </div>
             <div class="header-buttons">
-                <button class="btn btn-primary" id="btn-monthly-report" style="background: #1e3a8a;"><span class="btn-icon">📄</span> Generate Monthly Report</button>
-                <button class="btn btn-primary" id="btn-download-pdf"><span class="btn-icon">📥</span> Download PDF</button>
-                <button class="btn btn-secondary" id="btn-export-csv"><span class="btn-icon">📤</span> Export CSV</button>
+                <button class="btn btn-primary" id="btn-monthly-report" style="background: #1e3a8a;">Generate Monthly Report</button>
+                <button class="btn btn-primary" id="btn-download-pdf">Download PDF</button>
+                <button class="btn btn-secondary" id="btn-export-csv">Export CSV</button>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
         <div class="filter-bar">
             <div class="filter-item">
                 <label>Date Range:</label>
-                <input type="date" id="filter-start-date" value="2010-01-01">
+                <input type="date" id="filter-start-date" value="2019-01-01">
                 <span class="separator">to</span>
                 <input type="date" id="filter-end-date" value="2026-12-31">
             </div>
