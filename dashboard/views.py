@@ -386,7 +386,9 @@ def api_send_monthly_report_email(request):
         # Compile report PDF on the fly
         pdf_buffer = generate_monthly_report_pdf(target_year, target_month)
         
-        recipient = settings.REPORT_RECIPIENT_EMAIL
+        recipient = request.GET.get('email', '').strip()
+        if not recipient:
+            recipient = settings.REPORT_RECIPIENT_EMAIL
         
         email = EmailMessage(
             subject=f"FOREST-AI: Monthly Deforestation & Land Cover Report - {month_name}",

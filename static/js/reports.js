@@ -384,11 +384,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 var year = dateObj.getFullYear();
                 var month = dateObj.getMonth() + 1;
 
+                // Prompt user for recipient email address
+                var recipientEmail = prompt("Please enter the recipient email address:", "udithasunimal18@gmail.com");
+                if (recipientEmail === null) {
+                    return; // Cancelled
+                }
+                recipientEmail = recipientEmail.trim();
+                if (recipientEmail !== "") {
+                    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(recipientEmail)) {
+                        alert("Please enter a valid email address.");
+                        return;
+                    }
+                }
+
                 btnEmailReport.disabled = true;
                 var originalText = btnEmailReport.innerText;
                 btnEmailReport.innerText = "Sending...";
 
-                fetch('/dashboard/api/send-monthly-report-email/?year=' + year + '&month=' + month)
+                var url = '/dashboard/api/send-monthly-report-email/?year=' + year + '&month=' + month;
+                if (recipientEmail) {
+                    url += '&email=' + encodeURIComponent(recipientEmail);
+                }
+
+                fetch(url)
                     .then(response => response.json())
                     .then(data => {
                         btnEmailReport.disabled = false;
