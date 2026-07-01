@@ -14,7 +14,7 @@
 body.report-body {
     background: #f8fafc;
     color: var(--text-main);
-    font-family: 'Segoe UI', -apple-system, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     margin: 0;
     padding: 0;
 }

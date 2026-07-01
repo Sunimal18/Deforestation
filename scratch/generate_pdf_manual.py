@@ -29,7 +29,7 @@ def build_pdf(filename="FOREST-AI_User_Manual.pdf"):
             if self._pageNumber == 1:
                 return  # Suppress headers/footers on cover page
             self.saveState()
-            self.setFont("Helvetica", 8)
+            self.setFont("Times-Roman", 8)
             self.setFillColor(colors.HexColor("#64748b"))
             
             # Header
@@ -62,7 +62,7 @@ def build_pdf(filename="FOREST-AI_User_Manual.pdf"):
     title_style = ParagraphStyle(
         'CoverTitle',
         parent=styles['Normal'],
-        fontName='Helvetica-Bold',
+        fontName='Times-Bold',
         fontSize=28,
         leading=34,
         textColor=colors.HexColor("#15803d"),
@@ -72,7 +72,7 @@ def build_pdf(filename="FOREST-AI_User_Manual.pdf"):
     subtitle_style = ParagraphStyle(
         'CoverSubtitle',
         parent=styles['Normal'],
-        fontName='Helvetica',
+        fontName='Times-Roman',
         fontSize=13,
         leading=18,
         textColor=colors.HexColor("#475569"),
@@ -82,7 +82,7 @@ def build_pdf(filename="FOREST-AI_User_Manual.pdf"):
     h1_style = ParagraphStyle(
         'Heading1_Custom',
         parent=styles['Normal'],
-        fontName='Helvetica-Bold',
+        fontName='Times-Bold',
         fontSize=18,
         leading=22,
         textColor=colors.HexColor("#0f172a"),
@@ -94,7 +94,7 @@ def build_pdf(filename="FOREST-AI_User_Manual.pdf"):
     h2_style = ParagraphStyle(
         'Heading2_Custom',
         parent=styles['Normal'],
-        fontName='Helvetica-Bold',
+        fontName='Times-Bold',
         fontSize=12,
         leading=16,
         textColor=colors.HexColor("#1e293b"),
@@ -106,7 +106,7 @@ def build_pdf(filename="FOREST-AI_User_Manual.pdf"):
     body_style = ParagraphStyle(
         'Body_Custom',
         parent=styles['Normal'],
-        fontName='Helvetica',
+        fontName='Times-Roman',
         fontSize=10,
         leading=14.5,
         textColor=colors.HexColor("#334155"),
