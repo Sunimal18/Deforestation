@@ -10,17 +10,17 @@
 
     <ul class="menu">
         <li class="{% if request.path == '/dashboard/' %}active{% endif %}"><a href="/dashboard/">Dashboard</a></li>
-        <li class="{% if request.path == '/disturbance-detection/' %}active{% endif %}"><a href="/disturbance-detection/">Disturbance Detection</a></li>
-        <li class="{% if request.path == '/risk-prediction/' %}active{% endif %}"><a href="/risk-prediction/">Risk Prediction</a></li>
-        <li class="{% if request.path == '/reforestation/' %}active{% endif %}"><a href="/reforestation/">Reforestation</a></li>
-        <li class="{% if request.path == '/dashboard/reports/' %}active{% endif %}"><a href="/dashboard/reports/">Reports</a></li>
+        <li class="{% if '/disturbance-detection/' in request.path %}active{% endif %}"><a href="/disturbance-detection/">Disturbance Detection</a></li>
+        <li class="{% if '/risk-prediction/' in request.path %}active{% endif %}"><a href="/risk-prediction/">Risk Prediction</a></li>
+        <li class="{% if '/reforestation/' in request.path %}active{% endif %}"><a href="/reforestation/">Reforestation</a></li>
+        <li class="{% if '/reports/' in request.path %}active{% endif %}"><a href="/dashboard/reports/">Reports</a></li>
+        <li class="{% if '/user-manual/' in request.path %}active{% endif %}"><a href="/dashboard/user-manual/">User Manual</a></li>
     </ul>
 
     <div class="nav-icons" style="position: relative; display: flex; align-items: center; gap: 20px;">
         <!-- Bell Icon with Dropdown Wrapper -->
         <div class="nav-icon-wrapper" style="position: relative; display: inline-block;">
-            <span id="nav-bell-btn" style="position: relative; display: inline-block; font-size: 20px; cursor: pointer; user-select: none;">
-                🔔
+            <span id="nav-bell-btn" style="position: relative; display: inline-block; font-size: 20px; cursor: pointer; user-select: none;"><img src="{% static 'images/notification.png' %}" alt="" height="30px">
                 <span id="nav-alert-badge" style="position: absolute; top: -2px; right: -2px; background: #ef4444; border: 2px solid white; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
             </span>
             
@@ -41,7 +41,7 @@
 
         <!-- Profile Icon with Dropdown Wrapper -->
         <div class="nav-icon-wrapper" style="position: relative; display: inline-block;">
-            <span id="nav-profile-btn" style="display: inline-block; font-size: 20px; cursor: pointer; user-select: none;">👤</span>
+            <span id="nav-profile-btn" style="display: inline-block; font-size: 20px; cursor: pointer; user-select: none;"><img src="{% static 'images/profile.png' %}" alt="" height="30px"></span>
             
             <!-- Profile Dropdown Overlay -->
             <div id="nav-profile-dropdown" class="nav-dropdown" style="display: none; position: absolute; right: 0; top: 40px; width: 260px; background: white; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); z-index: 1001; font-family: 'Segoe UI', system-ui, sans-serif; text-align: left;">
@@ -52,14 +52,13 @@
                     <div>
                         <h4 style="margin: 0; font-size: 15px; font-weight: 700; color: #111827;">{{ request.user.username|default:"admin" }}</h4>
                         <span style="font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">
-                            {% if request.user.is_superuser %}Super Administrator{% else %}Conservation Officer{% endif %}
                         </span>
                     </div>
                 </div>
                 <div style="padding: 14px 18px; font-size: 12.5px; color: #4b5563; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid #f3f4f6;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="color: #9ca3af; font-weight: 500;">Email</span> 
-                        <span style="color: #1f2937; font-weight: 600;">{{ request.user.email|default:"admin@example.com" }}</span>
+                        <span style="color: #1f2937; font-weight: 600;">{{ request.user.email|default:"admin@gmail.com" }}</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="color: #9ca3af; font-weight: 500;">Status</span> 

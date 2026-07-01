@@ -1,0 +1,158 @@
+/* =========================
+   USER MANUAL STYLING
+   ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    color: #1e293b;
+}
+
+.manual-container {
+    padding: 30px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.manual-header {
+    margin-bottom: 30px;
+}
+
+.manual-header h1 {
+    font-size: 28px;
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.manual-header p {
+    font-size: 15px;
+    color: #64748b;
+}
+
+/* Feature Grid Layout */
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.feature-card-header {
+    background: #f8fafc;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.feature-badge {
+    background: #15803d;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.feature-card-header h2 {
+    font-size: 18px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.feature-card-body {
+    padding: 24px;
+}
+
+.feature-intro {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 20px;
+}
+
+/* Steps & Details list */
+.manual-steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.manual-step {
+    display: flex;
+    gap: 15px;
+}
+
+.manual-step-num {
+    background: #e0f2fe;
+    color: #0284c7;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.manual-step-content h3 {
+    font-size: 14.5px;
+    color: #1e293b;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.manual-step-content p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #64748b;
+}
+
+/* Callout Box */
+.tip-callout {
+    background: #f0fdf4;
+    border-left: 4px solid #16a34a;
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.tip-callout span {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.tip-callout p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #15803d;
+    margin: 0;
+}

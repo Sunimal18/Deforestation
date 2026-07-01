@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monthly Monitoring Report - {{ month_name }}</title>
-    <link rel="stylesheet" href="{% static 'css/monthly_report.css' %}?v=1.0">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}?v=1.6">
+    <link rel="stylesheet" href="{% static 'css/monthly_report.css' %}?v=1.1">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/dashboard.js' %}" defer></script>
 </head>
 <body class="report-body">
+    {% include 'partials/navbar.html' %}
 
     <!-- Screen-only Toolbar -->
     <div class="report-toolbar">

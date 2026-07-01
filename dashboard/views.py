@@ -336,3 +336,6 @@ def api_gee_tile_url(request):
         return JsonResponse({'tile_url': tile_url})
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+def user_manual(request):
+    return render(request, 'dashboard/user_manual.html')

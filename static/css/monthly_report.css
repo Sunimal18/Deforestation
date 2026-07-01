@@ -269,8 +269,9 @@ body.report-body {
         color: black !important;
     }
 
+    .navbar,
     .report-toolbar {
-        display: none !important; /* Hide screen buttons */
+        display: none !important; /* Hide screen buttons and navigation */
     }
 
     .report-document {

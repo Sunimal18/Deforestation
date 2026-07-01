@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manual - FOREST-AI</title>
+    
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}?v=1.6">
+    <link rel="stylesheet" href="{% static 'css/user_manual.css' %}?v=1.0">
+    
+    <!-- Load shared dropdown handlers -->
+    <script src="{% static 'js/dashboard.js' %}" defer></script>
+</head>
+<body>
+
+    {% include 'partials/navbar.html' %}
+
+    <div class="manual-container">
+        
+        <div class="manual-header">
+            <h1>FOREST-AI User Manual</h1>
+            <p>Welcome! This guide outlines how to use the conservation analytics tools, interpret outputs, and navigate features.</p>
+        </div>
+
+        <div class="features-grid">
+            
+            <!-- Section 1: Dashboard -->
+            <div class="feature-card">
+                <div class="feature-card-header">
+                    <div class="feature-badge">1</div>
+                    <h2>Dashboard Overview & Map Telemetry</h2>
+                </div>
+                <div class="feature-card-body">
+                    <p class="feature-intro">The Dashboard acts as your central landing portal, offering aggregated metrics and a telemetry-rich Leaflet map overlay of the Wilpattu Sanctuary boundary.</p>
+                    <ul class="manual-steps">
+                        <li class="manual-step">
+                            <div class="manual-step-num">A</div>
+                            <div class="manual-step-content">
+                                <h3>Layers Toggles (Sidebar)</h3>
+                                <p>Toggle active map features by checking or unchecking layers. Turn on **Disturbance** to see past forest losses, **Risk Prediction** for future danger zones, or **Reforestation** for active plot areas.</p>
+                            </div>
+                        </li>
+                        <li class="manual-step">
+                            <div class="manual-step-num">B</div>
+                            <div class="manual-step-content">
+                                <h3>Time Filter Sliders</h3>
+                                <p>Adjust the slider or drop-downs to filter disturbance plots dynamically. Only logs within your chosen window will stay visible on the map.</p>
+                            </div>
+                        </li>
+                        <li class="manual-step">
+                            <div class="manual-step-num">C</div>
+                            <div class="manual-step-content">
+                                <h3>Alert Notifications (Bell Icon)</h3>
+                                <p>Located on the right side of the navigation bar. Click it to view the top 4 most recent forest disturbances with their severity tags. Clicking any item zooms you directly to that location on the map.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="tip-callout">
+                        <span>💡</span>
+                        <p><strong>System Tip:</strong> You can click on any database polygon drawn on the map to trigger a detailed popup summary including coordinates, road distance, and AI explanations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Disturbance Detection -->
+            <div class="feature-card">
+                <div class="feature-card-header">
+                    <div class="feature-badge">2</div>
+                    <h2>Disturbance Detection & Verification</h2>
+                </div>
+                <div class="feature-card-body">
+                    <p class="feature-intro">This module monitors forest cover losses and vegetation declines using index measurements extracted from Sentinel-2 satellite data.</p>
+                    <ul class="manual-steps">
+                        <li class="manual-step">
+                            <div class="manual-step-num">A</div>
+                            <div class="manual-step-content">
+                                <h3>Disturbances Map Card</h3>
+                                <p>Features a dedicated map showing verified canopy loss locations. Hovering over a polygon shows its **Area ID**, and clicking reveals the affected extent and detection date.</p>
+                            </div>
+                        </li>
+                        <li class="manual-step">
+                            <div class="manual-step-num">B</div>
+                            <div class="manual-step-content">
+                                <h3>NDVI Change Metric</h3>
+                                <p>Represents the Normalized Difference Vegetation Index change. A negative score (e.g. -0.25) implies localized canopy loss or land clearance, indicating potential logging activity.</p>
+                            </div>
+                        </li>
+                        <li class="manual-step">
+                            <div class="manual-step-num">C</div>
+                            <div class="manual-step-content">
+                                <h3>Confidence Scoring</h3>
+                                <p>Represents the verified neural network confidence level. Scores above 85% reflect highly verified canopy reductions that require immediate patrol deployments.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 3: Risk Prediction -->
+            <div class="feature-card">
+                <div class="feature-card-header">
+                    <div class="feature-badge">3</div>
+                    <h2>Risk Prediction & Vulnerability Modeling</h2>
+                </div>
+                <div class="feature-card-body">
+                    <p class="feature-intro">The Risk Prediction module models the likelihood of future deforestation based on proximity factors and landscape features.</p>
+                    <ul class="manual-steps">
+                        <li class="manual-step">
+                            <div class="manual-step-num">A</div>
+                            <div class="manual-step-content">
+                                <h3>Deforestation Threat Score</h3>
+                                <p>Calculated using distance measurements to the nearest logging corridors: **Roads**, **Villages**, and **Waterways**. Closer proximity increases the priority and likelihood of illegal activity.</p>
+                            </div>
+                        </li>
+                        <li class="manual-step">
+                            <div class="manual-step-num">B</div>
+                            <div class="manual-step-content">
+                                <h3>Explainable AI (XAI)</h3>
+                                <p>Provides clear, natural-language rationales detailing why a zone is flagged as high-risk. This translates raw AI weight matrices into actionable explanations for field rangers.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 4: Reforestation -->
+            <div class="feature-card">
+                <div class="feature-card-header">
+                    <div class="feature-badge">4</div>
+                    <h2>Reforestation Recommendations</h2>
+                </div>
+                <div class="feature-card-body">
+                    <p class="feature-intro">Suggests localized target zones for replanting efforts, optimizing resource allocation by analyzing soil suitability and threat exposure.</p>
+                    <ul class="manual-steps">
+                        <li class="manual-step">
+                            <div class="manual-step-num">A</div>
+                            <div class="manual-step-content">
+                                <h3>Reforestation Suitability</h3>
+                                <p>Categorizes zones as **Suitable**, **Moderately Suitable**, or **Unsuitable** based on proximity to natural water bodies and canopy health history.</p>
+                            </div>
+                        </li>
+                        <li class="manual-step">
+                            <div class="manual-step-num">B</div>
+                            <div class="manual-step-content">
+                                <h3>Reforestation Priority</h3>
+                                <p>A priority metric (High, Medium, Low) that identifies target plots where tree planting will have the highest ecological benefit, focusing heavily on degraded high-risk zones.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 5: Monitoring Reports -->
+            <div class="feature-card">
+                <div class="feature-card-header">
+                    <div class="feature-badge">5</div>
+                    <h2>Monitoring Reports Generation</h2>
+                </div>
+                <div class="feature-card-body">
+                    <p class="feature-intro">The Reporting module allows you to compile, search, and download aggregated summaries of Wilpattu's forest status.</p>
+                    <ul class="manual-steps">
+                        <li class="manual-step">
+                            <div class="manual-step-num">A</div>
+                            <div class="manual-step-content">
+                                <h3>Custom Date Querying</h3>
+                                <p>Select custom start and end dates to filter logs, updating the reports list table immediately.</p>
+                            </div>
+                        </li>
+                        <li class="manual-step">
+                            <div class="manual-step-num">B</div>
+                            <div class="manual-step-content">
+                                <h3>Generate Monthly Report</h3>
+                                <p>Compiles a fully-formatted, A4-printable Academic Deforestation and Land Coverage report for the selected month, suitable for submission to forestry officials.</p>
+                            </div>
+                        </li>
+                        <li class="manual-step">
+                            <div class="manual-step-num">C</div>
+                            <div class="manual-step-content">
+                                <h3>Export Formats (PDF & CSV)</h3>
+                                <p>Download tabular views directly in raw CSV (for database analyses) or save them as clean PDF documents.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
