@@ -201,21 +201,19 @@ def generate_monthly_report_pdf(year, month):
             [
                 Paragraph("<b>Area ID</b>", table_header_style),
                 Paragraph("<b>Threat Score</b>", table_header_style),
-                Paragraph("<b>Road Proximity</b>", table_header_style),
-                Paragraph("<b>Village Proximity</b>", table_header_style),
-                Paragraph("<b>Protected Area</b>", table_header_style),
+                Paragraph("<b>Risk Level</b>", table_header_style),
+                Paragraph("<b>Primary Factors</b>", table_header_style),
             ]
         ]
         for r in risks[:20]:
             risk_data.append([
                 Paragraph(r.area_id, table_body_style),
-                Paragraph(str(r.risk_score), table_body_style),
-                Paragraph(f"{round(r.road_distance_m)} m", table_body_style),
-                Paragraph(f"{round(r.village_distance_m)} m", table_body_style),
-                Paragraph("YES" if r.protected_area else "NO", table_body_style),
+                Paragraph(f"{r.risk_score}%", table_body_style),
+                Paragraph(r.risk_level.upper(), table_body_style),
+                Paragraph(r.primary_factors, table_body_style),
             ])
             
-        risk_table = Table(risk_data, colWidths=[80, 80, 80, 80, 80])
+        risk_table = Table(risk_data, colWidths=[80, 80, 80, 160])
         risk_table.setStyle(TableStyle([
             ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#1e293b")),
             ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#e2e8f0")),
