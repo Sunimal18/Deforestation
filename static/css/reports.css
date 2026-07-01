@@ -2,6 +2,18 @@
    REPORTS PAGE STYLING
    ========================= */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f8fafc;
+    margin: 0;
+    padding: 0;
+}
+
 .content {
     padding: 30px 40px;
     max-width: 1280px;
